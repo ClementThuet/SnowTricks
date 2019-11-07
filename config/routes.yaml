@@ -1,3 +1,23 @@
 index:
     path: /
     controller: App\Controller\STController::index
+    
+login_form:
+    path: /Connexion
+    controller: App\Controller\STController::login   
+    
+signup:
+    path: /Inscription
+    controller: App\Controller\STController::signup
+    
+deconnexion:
+    path: /Deconnexion
+    controller: App\Controller\STController::deconnexion
+    
+dashboard:
+    path: /Tableau-de-bord
+    controller: App\Controller\STController::dashboard
+    
+add_trick:
+    path: /Ajouter-une-figure
+    controller: App\Controller\STController::ajoutFigure

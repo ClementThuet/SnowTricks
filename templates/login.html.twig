@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil - SnowTricks{% endblock %}
+{% block body %}
+    {% block content %}
+        <div class="container-fluid">
+            <div class="row">
+                <ul>
+                    <li><a href="/SnowTricks/public/" class="active">Les figures</a></li>
+                    <li><a href="/SnowTricks/public/Inscription">S'inscrire</a></li>
+                    <li><a href="/SnowTricks/public/Connexion">Se connecter</a></li>
+                    {%if app.session.get('logged') == true %}
+                        <li><a href="/SnowTricks/public/Connexion">Tableau de bord</a></li>
+                    {%endif%}
+                </ul>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h1 class='text-center'>Connexion</h1>
+                    {{ form_start(form) }}
+                        {{ form_errors(form) }}
+                        <div class="form-group">
+                            {{ form_row(form.email,{'attr':{'class':'form-control','placeholder':'Veuillez saisir votre email'}}) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_row(form.motDePasse,{'attr':{'class':'form-control','placeholder':'Veuillez saisir votre mot de passe'}}) }}
+                        </div>
+                        <div class="form-group text-center">
+                            {{ form_row(form.send,{'attr':{'class':'btn btn-primary'}}) }}
+                        </div>
+                    {{ form_end(form) }}
+                    <div id="formFooter">
+                        <a class="underlineHover" href="#">Mot de passe oublié ?</a>
+                        <p class="text-center">Pas encore de compte ? <a href="signup">S'inscrire</a> </p> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+{% endblock %}
+        
+
+

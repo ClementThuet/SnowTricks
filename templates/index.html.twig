@@ -1,22 +1,29 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accueil - Bibliothèque de l'école de Boursonne{% endblock %}
+{% block title %}Accueil - SnowTricks{% endblock %}
 {% block body %}
     {% block content %}
         <div class="container-fluid">
             <div class="row">
                 <ul>
-                    <li><a href="/BibliothequeEcole/public/" class="active">Les figures</a></li>
-                    <li><a href="/BibliothequeEcole/public/Bibliotheque">S'inscrire</a></li>
-                    <li><a href="/BibliothequeEcole/public/Eleves">Se connecter</a></li>
+                    <li><a href="/SnowTricks/public/" class="active">Les figures</a></li>
+                    <li><a href="/SnowTricks/public/Inscription">S'inscrire</a></li>
+                    <li><a href="/SnowTricks/public/Connexion">Se connecter</a></li>
+                    {%if app.session.get('logged') == true %}
+                        <li><a href="/SnowTricks/public/Connexion">Tableau de bord</a></li>
+                    {%endif%}
                 </ul>
             </div>
         </div>
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <h1>Bienvenue sur Snow tricks</h1>
-                    <h3>Venez découvrir tout ce qu'il y a à savoir sur le snowboard </h3>
+                    <h1>Bienvenue sur Snowtricks</h1>
+                    <h2>Venez découvrir tout ce qu'il y a à savoir sur le snowboard </h2>
+                    <h3>Les figures</h3>
+                    {%for figure in figures%}
+                        <div>{{figure.nom}}</div>
+                    {%endfor%}
                 </div>
             </div>
         </div>
