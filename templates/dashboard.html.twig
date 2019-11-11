@@ -9,55 +9,42 @@
                     <li><a href="/SnowTricks/public/" class="active">Les figures</a></li>
                     <li><a href="/SnowTricks/public/Inscription">S'inscrire</a></li>
                     <li><a href="/SnowTricks/public/Connexion">Se connecter</a></li>
+                    {%if app.session.get('logged') == true %}
+                        <li><a href="/SnowTricks/public/TableauDeBord">Tableau de bord</a></li>
+                    {%endif%}
                 </ul>
             </div>
         </div>
-        {% if app.session.get('logged') == true %}
-            <div class="container">
-                <h1 class='text-center'>Tableau de bord</h1>
-                <h4 class='text-center'>Bienvenue {{app.session.get('utilisateur-prenom')}} {{app.session.get('utilisateur-nom')}}  </h4>
-                <p> Que voulez-vous faire aujourd'hui ?</p>
-                <div class="row">
-                    <div class="col-lg-6 col-md-12 bloc">
-                        <a href="/clementsblog/admin/ajouterArticle">
-                            <input class='bt_dashboard' type='button' value='Ajouter un article'>
-                        </a>
-                    </div>
-                    <div class="col-lg-6 col-md-12 bloc">
-                        <a href="/clementsblog/admin/gestionArticles">
-                            <input class='bt_dashboard' type='button' value='Modifier un article'>
-                        </a>
-                    </div>
-                    <div class="col-lg-6 col-md-12 bloc">
-                        <a href="/clementsblog/admin/gestionArticles">
-                            <input class='bt_dashboard' type='button' value='Supprimer un article'>
-                        </a>
-                    </div>
-                    <div class="col-lg-6 col-md-12 bloc">
-                        <a href="/clementsblog/admin/modererCommentaires">
-                            <input class='bt_dashboard' type='button' value='Modérer les commentaires'>
-                        </a>
-                    </div>
-                </div>
-                <li class="list-inline-item">
-                    <a href="Deconnexion">
-                        <span class="fa-stack fa-lg">
-                            <i class="fas fa-circle fa-stack-2x"></i>
-                            <i class="fas fa-sign-out-alt fa-stack-1x fa-inverse"></i>
-                        </span>
+        <div class="container">
+            <h1 class='text-center'>Tableau de bord</h1>
+            <h4 class='text-center'>Bienvenue {{app.session.get('utilisateur-prenom')}} {{app.session.get('utilisateur-nom')}}  </h4>
+            <p> Que voulez-vous faire aujourd'hui ?</p>
+            <div class="row">
+                <div class="col-lg-6 col-md-12 bloc">
+                    <a href="Ajouter-une-figure">
+                        <input class='bt_dashboard' type='button' value='Ajouter une figure'>
                     </a>
-                    <span style='display:block;'>Déconnexion</span>
-                </li>
-            </div>         
-        {% else %}
-            <div class='container'>
-                <div class='row'>
-                    <div class='col-12 text-center'>
-                        <h1 class='title'>Vous devez être connecté pour accèder à cette page</h1>
-                        <a href="Connexion"><input type='button' class="btn btn-primary" value='Se connecter'></a>
-                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12 bloc">
+                    <a href="Modifier-une-figure">
+                        <input class='bt_dashboard' type='button' value='Modifier une figure'>
+                    </a>
+                </div>
+                <div class="col-lg-6 col-md-12 bloc">
+                    <a href="Supprimer-une-figure">
+                        <input class='bt_dashboard' type='button' value='Supprimer une figure'>
+                    </a>
                 </div>
             </div>
-        {% endif %}
+            <li class="list-inline-item">
+                <a href="Deconnexion">
+                    <span class="fa-stack fa-lg">
+                        <i class="fas fa-circle fa-stack-2x"></i>
+                        <i class="fas fa-sign-out-alt fa-stack-1x fa-inverse"></i>
+                    </span>
+                </a>
+                <span style='display:block;'>Déconnexion</span>
+            </li>
+        </div>         
     {% endblock %}
 {% endblock %}

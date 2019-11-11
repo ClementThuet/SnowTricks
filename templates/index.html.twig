@@ -10,7 +10,7 @@
                     <li><a href="/SnowTricks/public/Inscription">S'inscrire</a></li>
                     <li><a href="/SnowTricks/public/Connexion">Se connecter</a></li>
                     {%if app.session.get('logged') == true %}
-                        <li><a href="/SnowTricks/public/Connexion">Tableau de bord</a></li>
+                        <li><a href="/SnowTricks/public/TableauDeBord">Tableau de bord</a></li>
                     {%endif%}
                 </ul>
             </div>
@@ -21,9 +21,11 @@
                     <h1>Bienvenue sur Snowtricks</h1>
                     <h2>Venez découvrir tout ce qu'il y a à savoir sur le snowboard </h2>
                     <h3>Les figures</h3>
-                    {%for figure in figures%}
-                        <div>{{figure.nom}}</div>
-                    {%endfor%}
+                    {%if figures is defined%}
+                        {%for figure in figures%}
+                            <div>{{figure.nom}}</div>
+                        {%endfor%}
+                    {%endif%}
                 </div>
             </div>
         </div>

@@ -8,7 +8,6 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Validator\Constraints\EmailValidator;
 
 class LoginType extends AbstractType
 {
@@ -24,9 +23,9 @@ class LoginType extends AbstractType
                 new NotBlank()]
             ])
             ->add('send', SubmitType::class)
-            ->add('send', SubmitType::class, ['label' => 'Me connecter'])
-        ;
+            ->add('send', SubmitType::class, ['label' => 'Me connecter']);
     }
+    
     public function setDefaultOptions(OptionsResolverInterface $resolver)
 {
     $resolver->setDefaults(array(            

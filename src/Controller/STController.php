@@ -10,15 +10,12 @@ use App\Form\Type\FigureType;
 use App\Form\Type\LoginType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class STController extends AbstractController{
     
-    private $session;
-
-    public function __construct(SessionInterface $session)
-    {
-        $this->session = $session;
-    }
+    
+    
     public function index(){
         
         $entityManager = $this->getDoctrine()->getManager();
@@ -34,8 +31,6 @@ class STController extends AbstractController{
         $form = $this->createForm(UtilisateurType::class, $utilisateur);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            // $form->getData() holds the submitted values
-            // but, the original `$task` variable has also been updated
             $utilisateur = $form->getData();
             $notHashedPassword=$utilisateur->getMotDePasse();
             $utilisateur->setMotDePasse(password_hash($notHashedPassword, PASSWORD_DEFAULT));
@@ -49,43 +44,24 @@ class STController extends AbstractController{
         ]);
     }
     
-    //Affiche la page de login avec l'état de la connexion, par défaut NULL
-    public function login(Request $request)
+    //Affiche la page de login 
+    public function login(Request $request, AuthenticationUtils $authenticationUtils)
     {
+        $error = $authenticationUtils->getLastAuthenticationError();
+        // last username entered by the user
+        $lastUsername = $authenticationUtils->getLastUsername();
+        
         $form = $this->createForm(LoginType::class);
         $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) 
-        {
-            $data = $form->getData();
-            $hashedPassword=$data['motDePasse'];
-            $utilisateurs = $this->getDoctrine()->getRepository(Utilisateur::class)->findAll();
-            foreach ($utilisateurs as $utilisateur)
-            {
-                if(password_verify($hashedPassword, $utilisateur->getMotDePasse()))
-                {
-                    //Stocker infos en session
-                    $this->session->set('logged', true);
-                    $this->session->set('utilisateur-id', $utilisateur->getId());
-                    $this->session->set('utilisateur-nom', $utilisateur->getNom());
-                    $this->session->set('utilisateur-prenom', $utilisateur->getPrenom());
-                    $this->session->set('utilisateur-email', $utilisateur->getEmail());
-                    return $this->redirectToRoute('dashboard');
-                }
-            }
-            return $this->render('login.html.twig', [
-                'form' => $form->createView()]);
-        }
         
         return $this->render('login.html.twig', [
-            'form' => $form->createView()]);
+                'last_username' => $lastUsername,
+                'error'         => $error,
+                'form' => $form->createView()]);
     }
     
-    //Détruit la session
     public function deconnexion(){
         
-        $this->session->invalidate();
-        return $this->render('index.html.twig');
     }
     
     public function dashboard(){
@@ -94,6 +70,13 @@ class STController extends AbstractController{
     
     public function ajoutFigure(Request $request){
         
+         // usually you'll want to make sure the user is authenticated first
+        //$this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        // returns your User object, or null if the user is not authenticated
+        //$user = $this->getUser();
+    
+   
         $figure = new Figure;
         
         $form = $this->createForm(FigureType::class, $figure);
@@ -101,7 +84,8 @@ class STController extends AbstractController{
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $figure = $form->getData();
-            $utilisateur = $entityManager->getRepository(Utilisateur::class)->find($this->session->get('utilisateur-id'));
+            //EN ATTENDANT DE DEBUGGER LOGIN -> TOUT CREEE PAR USER 1
+            $utilisateur = $entityManager->getRepository(Utilisateur::class)->find(1);
             $figure->setUtilisateur($utilisateur);
             $entityManager->persist($figure);
             $entityManager->flush();

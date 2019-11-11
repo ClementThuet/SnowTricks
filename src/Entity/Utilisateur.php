@@ -5,12 +5,13 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UtilisateurRepository")
  * @UniqueEntity("email",message="Cette adresse email est déjà utilisée.")
  */
-class Utilisateur
+class Utilisateur implements UserInterface
 {
     /**
      * @ORM\Id()
@@ -43,7 +44,10 @@ class Utilisateur
      */
     private $motDePasse;
     
-    
+    /**
+     * @ORM\Column(type="json")
+     */
+    private $roles = [];
     
     public function getId(): ?int
     {
@@ -86,15 +90,61 @@ class Utilisateur
         return $this;
     }
 
-    public function getMotDePasse(): ?string
-    {
-        return $this->motDePasse;
-    }
-
+    
     public function setMotDePasse(string $motDePasse): self
     {
         $this->motDePasse = $motDePasse;
 
         return $this;
+    }
+    
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUsername(): string
+    {
+        return (string) $this->email;
+    }
+    
+    /**
+     * @see UserInterface
+    */
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+        return array_unique($roles);
+    }
+    
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+        return $this;
+    }
+    
+    /**
+     * @see UserInterface
+     */
+    public function getPassword()
+    {
+         return $this->motDePasse;
+    }
+    /**
+     * @see UserInterface
+     */
+    public function getSalt()
+    {
+        // not needed for apps that do not check user passwords
+    }
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials()
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        $this->motDePasse = null;
     }
 }
