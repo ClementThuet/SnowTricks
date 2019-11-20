@@ -5,7 +5,12 @@ ul {
   overflow: hidden;
   background-color: #333;
 }
-
+ul.medias {
+    background-color: white !important;
+}
+.media-btn{
+    margin-right:5px;
+}
 li {
   float: left;
 }

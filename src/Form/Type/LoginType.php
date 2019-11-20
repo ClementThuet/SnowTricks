@@ -18,11 +18,10 @@ class LoginType extends AbstractType
                 'constraints' => [
                 new NotBlank()]
             ])
-            ->add('motDePasse', PasswordType::class,[
+            ->add('password', PasswordType::class,[
                 'constraints' => [
                 new NotBlank()]
             ])
-            ->add('send', SubmitType::class)
             ->add('send', SubmitType::class, ['label' => 'Me connecter']);
     }
     

@@ -5,6 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Entity\Utilisateur;
 use App\Entity\Figure;
+use App\Entity\Media;
 use App\Form\Type\UtilisateurType;
 use App\Form\Type\FigureType;
 use App\Form\Type\LoginType;
@@ -19,8 +20,20 @@ class STController extends AbstractController{
     public function index(){
         
         $entityManager = $this->getDoctrine()->getManager();
+        $figure= $entityManager->getRepository(Figure::class)->find(2);
+       $medias=$figure->getMedias();
+         //dd($medias[0]->getTitre());
+        $entityManager = $this->getDoctrine()->getManager();
         $figures = $entityManager->getRepository(Figure::class)->findAll();
         return $this->render('index.html.twig',['figures'=>$figures]);
+    }
+    
+    public function afficherFigure($nomFigure){
+        
+        $entityManager = $this->getDoctrine()->getManager();
+        $figure= $entityManager->getRepository(Figure::class)->findOneBy(['nom' => $nomFigure]);;
+       
+        return $this->render('figure.html.twig',['figure'=>$figure]);
     }
     
     //Affiche la page d'inscription
@@ -65,6 +78,7 @@ class STController extends AbstractController{
     }
     
     public function dashboard(){
+        //dd($this->getUser());
         return $this->render('dashboard.html.twig');
     }
     
@@ -75,18 +89,22 @@ class STController extends AbstractController{
 
         // returns your User object, or null if the user is not authenticated
         //$user = $this->getUser();
-    
    
-        $figure = new Figure;
-        
+        $figure = new Figure();
         $form = $this->createForm(FigureType::class, $figure);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $figure = $form->getData();
             //EN ATTENDANT DE DEBUGGER LOGIN -> TOUT CREEE PAR USER 1
-            $utilisateur = $entityManager->getRepository(Utilisateur::class)->find(1);
+            $utilisateur = $entityManager->getRepository(Utilisateur::class)->find(88);
             $figure->setUtilisateur($utilisateur);
+            foreach($figure->getMedias() as $media) {
+                if(!$figure->getMedias()->contains($media))
+                {
+                    $figure->addMedia($media);
+                }
+            }
             $entityManager->persist($figure);
             $entityManager->flush();
             return $this->redirectToRoute('index');

@@ -3,6 +3,9 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\ManyToOne;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\MediaRepository")
@@ -30,7 +33,27 @@ class Media
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $alt;
+    
+    /**
+     * @ManyToOne(targetEntity="Figure", inversedBy="medias")
+     * @Assert\Type(type="App\Entity\Figure")
+     * @Assert\Valid
+     */
+    private $figure;
+    
+    
+    public function getFigure()
+    {
+        return $this->figure;
+    }
 
+    public function setFigure($figure)
+    {
+        $this->figure = $figure;
+
+        return $this;
+    }
+    
     public function getId(): ?int
     {
         return $this->id;

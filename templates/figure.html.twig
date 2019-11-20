@@ -18,14 +18,17 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <h1>Bienvenue sur Snowtricks</h1>
-                    <h2>Venez découvrir tout ce qu'il y a à savoir sur le snowboard </h2>
-                    <h3>Les figures</h3>
-                    {%if figures is defined%}
-                        {%for figure in figures%}
-                            <a href="Figure/{{figure.nom}}"><div>{{figure.nom}}</div></a>
+                    <h1>{{figure.nom}}</h1>
+                    <h2>Venez découvrir tout ce qu'il y a à savoir sur le {{figure.nom}} </h2>
+                    <p>{{figure.description}}</p>
+                    <span>{{figure.groupe}}</span>
+                    <span> Ajouté par Nom Utilisateur à venir</span>
+                    <div>
+                        {% for media in figure.medias%}
+                            <h6>{{media.titre}}</h6>
+                            <img src="{{media.url}}" alt="{{media.alt}}">
                         {%endfor%}
-                    {%endif%}
+                    </div>
                 </div>
             </div>
         </div>

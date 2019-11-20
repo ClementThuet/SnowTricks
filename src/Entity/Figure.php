@@ -6,6 +6,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Doctrine\ORM\Mapping\ManyToOne;
+use Doctrine\ORM\Mapping\OneToMany;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\FigureRepository")
@@ -44,6 +46,20 @@ class Figure
      */
     private $utilisateur;
     
+    /**
+     * One figure has many medias. This is the inverse side.
+     * @OneToMany(targetEntity="Media", mappedBy="figure", cascade={"persist"})
+     */
+    private $medias;
+    
+    public function __construct() {
+        $this->medias = new ArrayCollection();
+    }
+    
+    public function getMedias()
+    {
+        return $this->medias;
+    }
     
     public function getId(): ?int
     {
@@ -96,5 +112,16 @@ class Figure
         $this->utilisateur = $utilisateur;
 
         return $this;
+    }
+    
+    public function addMedia(Media $media)
+    {
+        $media->setFigure($this);
+        $this->medias->add($media);
+    }
+
+    public function removeMedia(Media $media)
+    {
+       $this->medias->removeElement($media);
     }
 }

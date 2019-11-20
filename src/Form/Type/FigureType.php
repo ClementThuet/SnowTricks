@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use App\Entity\Figure;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class FigureType extends AbstractType
 {
@@ -19,7 +20,14 @@ class FigureType extends AbstractType
             ->add('nom', TextType::class)
             ->add('description', TextareaType::class)
             ->add('groupe', TextType::class)
-            ->add('save', SubmitType::class, ['label' => 'Ajouter une figure'])
+            ->add('medias', CollectionType::class,[
+            'entry_type' => MediaType::class,
+            'entry_options' => ['label' => false],
+            'by_reference' => false,
+            'allow_add' => true,
+            'allow_delete' => true,
+        ])
+            ->add('save', SubmitType::class, ['label' => 'Enregistrer'])
         ;
     }
     

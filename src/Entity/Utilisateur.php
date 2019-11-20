@@ -49,12 +49,12 @@ class Utilisateur implements UserInterface
      */
     private $roles = [];
     
-    public function getId(): ?int
+    public function getId(): int
     {
         return $this->id;
     }
 
-    public function getNom(): ?string
+    public function getNom(): string
     {
         return $this->nom;
     }
@@ -66,19 +66,19 @@ class Utilisateur implements UserInterface
         return $this;
     }
 
-    public function getPrenom(): ?string
+    public function getPrenom(): string
     {
         return $this->prenom;
     }
 
-    public function setPrenom(?string $prenom): self
+    public function setPrenom(string $prenom): self
     {
         $this->prenom = $prenom;
 
         return $this;
     }
 
-    public function getEmail(): ?string
+    public function getEmail(): string
     {
         return $this->email;
     }
@@ -113,7 +113,7 @@ class Utilisateur implements UserInterface
     */
     public function getRoles(): array
     {
-        $roles = $this->roles;
+        $roles = unserialize($this->roles);
         // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
         return array_unique($roles);
@@ -121,7 +121,7 @@ class Utilisateur implements UserInterface
     
     public function setRoles(array $roles): self
     {
-        $this->roles = $roles;
+        $this->roles = serialize($roles);
         return $this;
     }
     

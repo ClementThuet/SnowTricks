@@ -37,7 +37,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     {
         $credentials = [
             'email' => $request->request ->get('login')['email'],
-            'password' => $request->request ->get('login')['motDePasse'],
+            'password' => $request->request ->get('login')['password'],
         ];
         $request->getSession()->set(
             Security::LAST_USERNAME,
@@ -48,19 +48,20 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     }
     
     public function getUser($credentials, UserProviderInterface $userProvider)
-    {
+    {  
+            //return true;
         return $this->utilisateurRepository->findOneBy(['email' => $credentials['email']]);
     }
     
     public function checkCredentials($credentials, UserInterface $user)
     {
        
+        //return true;
         return $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
     }
     
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
-        
         //dd('successfully logged');
         return new RedirectResponse($this->router->generate('dashboard'));
     }

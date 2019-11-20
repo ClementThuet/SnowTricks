@@ -1,7 +1,10 @@
 index:
     path: /
     controller: App\Controller\STController::index
-    
+
+figure:
+       path: /Figure/{nomFigure}
+       controller: App\Controller\STController::afficherFigure  
 login_form:
     path: /Connexion
     controller: App\Controller\STController::login   

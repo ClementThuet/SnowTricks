@@ -30,6 +30,11 @@
                         <div class="form-group">
                             {{ form_row(form.groupe,{'attr':{'class':'form-control','placeholder':'Veuillez saisir le groupe de la figure'}}) }}
                         </div>
+                        
+                        <div class="form-group">
+                            <ul class="medias" data-prototype="{{form_widget(form.medias.vars.prototype)|e('html_attr') }}">
+                            </ul>
+                        </div>
                         <div class="form-group text-center">
                             {{ form_row(form.save,{'attr':{'class':'btn btn-primary'}}) }}
                         </div>
