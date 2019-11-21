@@ -5,7 +5,8 @@ index:
 figure:
        path: /Figure/{nomFigure}
        controller: App\Controller\STController::afficherFigure  
-login_form:
+       
+app_login:
     path: /Connexion
     controller: App\Controller\STController::login   
     

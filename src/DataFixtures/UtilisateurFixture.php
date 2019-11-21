@@ -22,8 +22,9 @@ class UtilisateurFixture extends BaseFixture
             $user->setEmail(sprintf('SuperUtilisateur%d@gmail.com', $i));
             $user->setNom($this->faker->lastName);
             $user->setPrenom($this->faker->firstName);
-            $user->setRoles(['ROLE_USER']);
-            $user->setMotDePasse($this->passwordEncoder->encodePassword($user,'test'));
+            //$user->setRoles(['ROLE_USER']);
+            $user->setPassword('test');
+            //$user->setMotDePasse($this->passwordEncoder->encodePassword($user,'test'));
             return $user;
         });
         $manager->flush();

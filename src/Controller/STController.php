@@ -18,7 +18,7 @@ class STController extends AbstractController{
     
     
     public function index(){
-        
+         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $entityManager = $this->getDoctrine()->getManager();
         $figure= $entityManager->getRepository(Figure::class)->find(2);
        $medias=$figure->getMedias();
@@ -58,19 +58,17 @@ class STController extends AbstractController{
     }
     
     //Affiche la page de login 
-    public function login(Request $request, AuthenticationUtils $authenticationUtils)
+     public function login(AuthenticationUtils $authenticationUtils)
     {
+        // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
-        
-        $form = $this->createForm(LoginType::class);
-        $form->handleRequest($request);
-        
+
         return $this->render('login.html.twig', [
-                'last_username' => $lastUsername,
-                'error'         => $error,
-                'form' => $form->createView()]);
+            'last_username' => $lastUsername,
+            'error'         => $error,
+        ]);
     }
     
     public function deconnexion(){

@@ -42,7 +42,7 @@ class Utilisateur implements UserInterface
      * @Assert\NotBlank(message = "Vous devez obligatoirement saisir un mot de passe.")
      * @ORM\Column(type="string", length=200)
      */
-    private $motDePasse;
+    private $password;
     
     /**
      * @ORM\Column(type="json")
@@ -91,9 +91,9 @@ class Utilisateur implements UserInterface
     }
 
     
-    public function setMotDePasse(string $motDePasse): self
+    public function setPassword(string $password): self
     {
-        $this->motDePasse = $motDePasse;
+        $this->password = $password;
 
         return $this;
     }
@@ -107,13 +107,12 @@ class Utilisateur implements UserInterface
     {
         return (string) $this->email;
     }
-    
     /**
      * @see UserInterface
-    */
+     */
     public function getRoles(): array
     {
-        $roles = unserialize($this->roles);
+        $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
         return array_unique($roles);
@@ -121,7 +120,7 @@ class Utilisateur implements UserInterface
     
     public function setRoles(array $roles): self
     {
-        $this->roles = serialize($roles);
+        $this->roles = $roles;
         return $this;
     }
     
@@ -130,8 +129,9 @@ class Utilisateur implements UserInterface
      */
     public function getPassword()
     {
-         return $this->motDePasse;
+        // not needed for apps that do not check user passwords
     }
+    
     /**
      * @see UserInterface
      */
@@ -139,12 +139,14 @@ class Utilisateur implements UserInterface
     {
         // not needed for apps that do not check user passwords
     }
+    
     /**
      * @see UserInterface
      */
     public function eraseCredentials()
     {
         // If you store any temporary, sensitive data on the user, clear it here
-        $this->motDePasse = null;
+        // $this->plainPassword = null;
     }
+    
 }
