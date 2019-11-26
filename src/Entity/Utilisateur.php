@@ -129,7 +129,7 @@ class Utilisateur implements UserInterface
      */
     public function getPassword()
     {
-        // not needed for apps that do not check user passwords
+         return $this->password;
     }
     
     /**

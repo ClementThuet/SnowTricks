@@ -1,8 +1,7 @@
-
-
 // setup an "add a tag" link
-var $addMediaButton = $('<button type="button" class="add_media_link media-btn btn btn-primary">Ajouter un media</button>');
-var $newLinkLi = $('<li></li>').append($addMediaButton);
+var $addMediaButton=$('.add_media_link');
+//var $newLinkLi = $('<li></li>').append($addMediaButton);
+var $newLinkLi = $('<li></li>');
 
 jQuery(document).ready(function() {
     
@@ -16,7 +15,7 @@ jQuery(document).ready(function() {
     // count the current form inputs we have (e.g. 2), use that as the new
     // index when inserting a new item (e.g. 2)
     $collectionHolder.data('index', $collectionHolder.find(':input').length);
-
+    
     $addMediaButton.on('click', function(e) {
         // add a new tag form (see next code block)
         addMediaForm($collectionHolder, $newLinkLi);

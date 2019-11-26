@@ -6,11 +6,11 @@
         <div class="container-fluid">
             <div class="row">
                 <ul>
-                    <li><a href="/SnowTricks/public/" class="active">Les figures</a></li>
-                    <li><a href="/SnowTricks/public/Inscription">S'inscrire</a></li>
-                    <li><a href="/SnowTricks/public/Connexion">Se connecter</a></li>
-                    {%if app.session.get('logged') == true %}
-                        <li><a href="/SnowTricks/public/TableauDeBord">Tableau de bord</a></li>
+                    <li><a href="/SnowTricks/public/" >Les figures</a></li>
+                    <li><a href="/SnowTricks/public/inscription" class="active">S'inscrire</a></li>
+                    <li><a href="/SnowTricks/public/connexion">Se connecter</a></li>
+                    {%if is_granted('IS_AUTHENTICATED_FULLY') == true %}
+                       <li><a href="/SnowTricks/public/tableau-de-bord">Tableau de bord</a></li>
                     {%endif%}
                 </ul>
             </div>

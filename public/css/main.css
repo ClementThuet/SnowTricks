@@ -1,32 +1,28 @@
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #333;
+#header{
+    min-height:100vh;
+    min-width:100vw;
+    background-image: url('../img/WP_snow1.jpg');
+    background-repeat: no-repeat;
 }
-ul.medias {
-    background-color: white !important;
+.navbar-ST{
+    width:100vw;
+   
 }
-.media-btn{
-    margin-right:5px;
+.navigation-menu{
+    display:inline-flex !important; 
+   justify-content:flex-end !important;
 }
-li {
-  float: left;
+#header a,li{
+    color:white;
+}
+.flex{
+    display:flex;
+}
+.navbar-brand-ST{
+    font-size: 2em !important;
+}
+.nav-link-ST{
+    font-size: 2em;
+    margin-right:10px;
 }
 
-li a {
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-li a:hover:not(.active) {
-  background-color: #333;
-}
-
-.active {
-  background-color: #00a3c6;
-}

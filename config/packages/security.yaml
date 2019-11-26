@@ -6,6 +6,9 @@ security:
             entity:
                 class: App\Entity\Utilisateur
                 property: email
+    encoders:
+        App\Entity\Utilisateur:
+            algorithm: auto
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -15,7 +18,9 @@ security:
             guard:
                 authenticators:
                     - App\Security\LoginFormAuthenticator
-
+            logout:
+                path:   app_logout
+                target: index
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
 

@@ -26,6 +26,7 @@ class FigureType extends AbstractType
             'by_reference' => false,
             'allow_add' => true,
             'allow_delete' => true,
+            'label' => false,
         ])
             ->add('save', SubmitType::class, ['label' => 'Enregistrer'])
         ;

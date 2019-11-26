@@ -3,13 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/wamp64/www/SnowTricks/src/Entity/Utilisateur.php</file>
-            <file>file:/C:/wamp64/www/SnowTricks/config/packages/security.yaml</file>
+            <file>file:/C:/wamp64/www/SnowTricks/public/css/main.css</file>
             <file>file:/C:/wamp64/www/SnowTricks/config/routes.yaml</file>
-            <file>file:/C:/wamp64/www/SnowTricks/templates/login.html.twig</file>
-            <file>file:/C:/wamp64/www/SnowTricks/src/DataFixtures/UtilisateurFixture.php</file>
+            <file>file:/C:/wamp64/www/SnowTricks/templates/ajoutFigureForm.html.twig</file>
+            <file>file:/C:/wamp64/www/SnowTricks/src/Form/Type/FigureType.php</file>
             <file>file:/C:/wamp64/www/SnowTricks/src/Controller/STController.php</file>
-            <file>file:/C:/wamp64/www/SnowTricks/src/Security/LoginFormAuthenticator.php</file>
+            <file>file:/C:/wamp64/www/SnowTricks/src/Form/Type/MediaType.php</file>
+            <file>file:/C:/wamp64/www/SnowTricks/templates/index.html.twig</file>
         </group>
     </open-files>
 </project-private>

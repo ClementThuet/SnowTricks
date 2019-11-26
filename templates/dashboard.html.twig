@@ -6,45 +6,39 @@
         <div class="container-fluid">
             <div class="row">
                 <ul>
-                    <li><a href="/SnowTricks/public/" class="active">Les figures</a></li>
-                    <li><a href="/SnowTricks/public/Inscription">S'inscrire</a></li>
-                    <li><a href="/SnowTricks/public/Connexion">Se connecter</a></li>
-                    {%if app.session.get('logged') == true %}
-                        <li><a href="/SnowTricks/public/TableauDeBord">Tableau de bord</a></li>
+                    <li><a href="/SnowTricks/public/" >Les figures</a></li>
+                    <li><a href="/SnowTricks/public/inscription" class="active">S'inscrire</a></li>
+                    <li><a href="/SnowTricks/public/connexion">Se connecter</a></li>
+                    {%if is_granted('IS_AUTHENTICATED_FULLY') == true %}
+                        <li><a href="/SnowTricks/public/tableau-de-bord">Tableau de bord</a></li>
                     {%endif%}
                 </ul>
             </div>
         </div>
         <div class="container">
             <h1 class='text-center'>Tableau de bord</h1>
-            <h4 class='text-center'>Bienvenue {{app.session.get('utilisateur-prenom')}} {{app.session.get('utilisateur-nom')}}  </h4>
+            <h4 class='text-center'>Bienvenue {{ app.user.prenom}} {{ app.user.nom}}  </h4>
             <p> Que voulez-vous faire aujourd'hui ?</p>
             <div class="row">
                 <div class="col-lg-6 col-md-12 bloc">
-                    <a href="Ajouter-une-figure">
+                    <a href="ajouter-une-figure">
                         <input class='bt_dashboard' type='button' value='Ajouter une figure'>
                     </a>
                 </div>
                 <div class="col-lg-6 col-md-12 bloc">
-                    <a href="Modifier-une-figure">
+                    <a href="modifier-une-figure">
                         <input class='bt_dashboard' type='button' value='Modifier une figure'>
                     </a>
                 </div>
                 <div class="col-lg-6 col-md-12 bloc">
-                    <a href="Supprimer-une-figure">
+                    <a href="supprimer-une-figure">
                         <input class='bt_dashboard' type='button' value='Supprimer une figure'>
                     </a>
                 </div>
             </div>
-            <li class="list-inline-item">
-                <a href="Deconnexion">
-                    <span class="fa-stack fa-lg">
-                        <i class="fas fa-circle fa-stack-2x"></i>
-                        <i class="fas fa-sign-out-alt fa-stack-1x fa-inverse"></i>
-                    </span>
-                </a>
-                <span style='display:block;'>Déconnexion</span>
-            </li>
+             <a href="deconnexion">
+                 <button class="btn btn-primary">Déconnexion</button>
+            </a>
         </div>         
     {% endblock %}
 {% endblock %}

@@ -7,10 +7,10 @@
             <div class="row">
                 <ul>
                     <li><a href="/SnowTricks/public/" >Les figures</a></li>
-                    <li><a href="/SnowTricks/public/Inscription" class="active">S'inscrire</a></li>
-                    <li><a href="/SnowTricks/public/Connexion">Se connecter</a></li>
-                    {%if app.session.get('logged') == true %}
-                        <li><a href="/SnowTricks/public/Connexion">Tableau de bord</a></li>
+                    <li><a href="/SnowTricks/public/inscription" class="active">S'inscrire</a></li>
+                    <li><a href="/SnowTricks/public/connexion">Se connecter</a></li>
+                    {%if is_granted('IS_AUTHENTICATED_FULLY') == true %}
+                        <li><a href="/SnowTricks/public/tableau-de-bord">Tableau de bord</a></li>
                     {%endif%}
                 </ul>
             </div>
@@ -30,10 +30,11 @@
                         <div class="form-group">
                             {{ form_row(form.groupe,{'attr':{'class':'form-control','placeholder':'Veuillez saisir le groupe de la figure'}}) }}
                         </div>
-                        
+                        <button type="button" class="add_media_link media-btn btn btn-primary">Ajouter un media</button>
                         <div class="form-group">
-                            <ul class="medias" data-prototype="{{form_widget(form.medias.vars.prototype)|e('html_attr') }}">
+                            <ul class="medias" data-prototype="{{ form_row(form.medias.vars.prototype)|e('html_attr') }}">
                             </ul>
+                            
                         </div>
                         <div class="form-group text-center">
                             {{ form_row(form.save,{'attr':{'class':'btn btn-primary'}}) }}

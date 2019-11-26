@@ -15,9 +15,9 @@ class MediaType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('titre', TextType::class)
-            ->add('url', TextareaType::class)
-            ->add('alt', TextType::class)
+            ->add('titre', TextType::class,['attr' => ['class' => 'form-control']])
+            ->add('url', TextareaType::class, ['label' => 'URL du média','attr' => ['class' => 'form-control']])
+            ->add('alt', TextType::class, ['label' => 'Description alternative','attr' => ['class' => 'form-control']])
         ;
     }
     

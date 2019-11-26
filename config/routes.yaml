@@ -3,25 +3,38 @@ index:
     controller: App\Controller\STController::index
 
 figure:
-       path: /Figure/{nomFigure}
+       path: /figure/{nomFigure}
        controller: App\Controller\STController::afficherFigure  
        
 app_login:
-    path: /Connexion
+    path: /connexion
     controller: App\Controller\STController::login   
     
 signup:
-    path: /Inscription
+    path: /inscription
     controller: App\Controller\STController::signup
     
-deconnexion:
-    path: /Deconnexion
+app_logout:
+    path: /deconnexion
     controller: App\Controller\STController::deconnexion
     
 dashboard:
-    path: /Tableau-de-bord
+    path: /tableau-de-bord
     controller: App\Controller\STController::dashboard
     
 add_trick:
-    path: /Ajouter-une-figure
+    path: /ajouter-une-figure
     controller: App\Controller\STController::ajoutFigure
+ 
+
+update_trick:
+    path: /modifier-une-figure/{idFigure}
+    controller: App\Controller\STController::modifierFigure
+    requirements:
+        idFigure: '\d+'
+        
+delete_trick:
+    path: /supprimer-une-figure/{idFigure}
+    controller: App\Controller\STController::supprimerFigure
+    requirements:
+        idFigure: '\d+'

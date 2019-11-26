@@ -18,11 +18,6 @@ class STController extends AbstractController{
     
     
     public function index(){
-         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-        $entityManager = $this->getDoctrine()->getManager();
-        $figure= $entityManager->getRepository(Figure::class)->find(2);
-       $medias=$figure->getMedias();
-         //dd($medias[0]->getTitre());
         $entityManager = $this->getDoctrine()->getManager();
         $figures = $entityManager->getRepository(Figure::class)->findAll();
         return $this->render('index.html.twig',['figures'=>$figures]);
@@ -82,11 +77,11 @@ class STController extends AbstractController{
     
     public function ajoutFigure(Request $request){
         
-         // usually you'll want to make sure the user is authenticated first
-        //$this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        // usually you'll want to make sure the user is authenticated first
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
         // returns your User object, or null if the user is not authenticated
-        //$user = $this->getUser();
+        $user = $this->getUser();
    
         $figure = new Figure();
         $form = $this->createForm(FigureType::class, $figure);
@@ -95,8 +90,7 @@ class STController extends AbstractController{
             $entityManager = $this->getDoctrine()->getManager();
             $figure = $form->getData();
             //EN ATTENDANT DE DEBUGGER LOGIN -> TOUT CREEE PAR USER 1
-            $utilisateur = $entityManager->getRepository(Utilisateur::class)->find(88);
-            $figure->setUtilisateur($utilisateur);
+            $figure->setUtilisateur($user);
             foreach($figure->getMedias() as $media) {
                 if(!$figure->getMedias()->contains($media))
                 {
@@ -110,5 +104,19 @@ class STController extends AbstractController{
         return $this->render('ajoutFigureForm.html.twig', [
             'form' => $form->createView(),
         ]);
+    }
+    
+    public function modifierFigure($idFigure){
+    
+    }
+    
+    public function supprimerFigure($idFigure){
+        
+        $entityManager = $this->getDoctrine()->getManager();
+        $figure = $entityManager->getRepository(Figure::class)->find($idFigure);
+        $entityManager->remove($figure);
+        $entityManager->flush();
+        
+        return $this->redirectToRoute('index');
     }
 }
