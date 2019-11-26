@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil - SnowTricks{% endblock %}
+{% block body %}
+    {% block content %}
+        <div class="container-fluid">
+            <div class="row">
+                <ul>
+                    <li><a href="/SnowTricks/public/" class="active">Les figures</a></li>
+                    <li><a href="/SnowTricks/public/Inscription">S'inscrire</a></li>
+                    <li><a href="/SnowTricks/public/Connexion">Se connecter</a></li>
+                    {%if app.session.get('logged') == true %}
+                        <li><a href="/SnowTricks/public/TableauDeBord">Tableau de bord</a></li>
+                    {%endif%}
+                </ul>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h1>{{figure.nom}}</h1>
+                    <h2>Venez découvrir tout ce qu'il y a à savoir sur le {{figure.nom}} </h2>
+                    <p>{{figure.description}}</p>
+                    <span>{{figure.groupe}}</span>
+                    <span> Ajouté par Nom Utilisateur à venir</span>
+                    <div>
+                        {% for media in figure.medias%}
+                            <h6>{{media.titre}}</h6>
+                            <img src="{{media.url}}" alt="{{media.alt}}">
+                        {%endfor%}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+{% endblock %}
