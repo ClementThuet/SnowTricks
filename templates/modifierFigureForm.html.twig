@@ -1,0 +1,96 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil - SnowTricks{% endblock %}
+{% block body %}
+    {% block content %}
+       <div class="container-fluid">
+            <div class="row" >
+                <div class="col-12">
+                    <nav class="navbar navbar-expand-lg navbar-ST" >
+                    <a class="navbar-brand navbar-brand-ST" href="/SnowTricks/public/">SnowTricks</a>
+                    <div class="collapse navbar-collapse navigation-menu" id="navbarSupportedContent" >
+                      <ul class="navbar-nav ">
+                        <li class="nav-item active ">
+                          <a class=" nav-link-ST " href="/SnowTricks/public/">Les figures <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                          <a class=" nav-link-ST" href="/SnowTricks/public/inscription">S'inscrire</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class=" nav-link-ST"  href="/SnowTricks/public/connexion">Connexion</a>
+                        </li>
+                        {%if is_granted('IS_AUTHENTICATED_FULLY') == true %}
+                            <li class="nav-item">
+                              <a class=" nav-link-ST"  href="/SnowTricks/public/deconnexion">Déconnexion</a>
+                            </li>
+                        {%endif%}
+                      </ul>
+                    </div>
+                  </nav>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h1 class='ST-title'>Modifier le trick : {{figure.nom}}</h1>
+                    {{ form_start(form) }}
+                        {{ form_errors(form) }}
+                        <div class="form-group">
+                            {{ form_row(form.nom,{'attr':{'class':'form-control','placeholder':'Veuillez saisir un nom pour la figure'}}) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_row(form.description,{'attr':{'class':'form-control','placeholder':'Veuillez saisir une description de la figure'}}) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_row(form.groupe,{'attr':{'class':'form-control','placeholder':'Veuillez saisir le groupe de la figure'}}) }}
+                        </div>
+                         <h3 class="ST-title"> Les médias liées au trick</h3>
+                </div>
+            </div>
+        </div> 
+                        
+        <div class="container-fluid">
+            <div class="row">
+                {% for media in medias %}
+                    <div class="col-3">
+                        <div class="media-trick">
+                            <h5 class="ST-title">{{media.titre}}</h5>
+                            {%if media.isImage == true%}
+                                <img class="img-trick" src="{{media.url}}" alt="{{media.alt}}">
+                            {%else%}
+                                <iframe class="video-trick"
+                                    src="{{media.url}}">
+                                </iframe>
+                            {%endif%}
+                            <br>
+                            <div class="glyph-container">
+                                <a href="/SnowTricks/public/modifier-un-media/{{media.id}}/{{figure.id}}">
+                                    <span class="glyphicon glyphicon-pencil glyphicon-media" aria-hidden="true"></span>
+                                </a>
+                                <a href="/SnowTricks/public/supprimer-un-media/{{media.id}}/{{figure.id}}">
+                                    <span class="glyphicon glyphicon-remove " aria-hidden="true"></span>
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                {%endfor%}
+            </div>
+            {#<div class="form-group">
+                <ul class="medias" data-prototype="{{ form_widget(form.medias.vars.prototype)|e('html_attr') }}">
+                </ul>
+            </div>#}
+            <div class="form-group update-medias-btns">
+                <a href="/SnowTricks/public/figure/{{figure.nom}}">
+                    <button type="button" class="add_media_link btn btn-primary medias-btns">Voir la figure</button>
+                 </a>
+                <a href="/SnowTricks/public/ajouter-un-media/{{figure.id}}">
+                    <button type="button" class="add_media_link btn btn-primary medias-btns">Ajouter un media</button>
+                 </a>
+                {{ form_row(form.save,{'attr':{'class':'btn btn-primary medias-btns'}}) }}
+            </div>
+            {{ form_end(form) }}
+            </div>
+    {% endblock %}
+{% endblock %}

@@ -19,7 +19,7 @@ class UtilisateurType extends AbstractType
             ->add('nom', TextType::class)
             ->add('prenom', TextType::class)
             ->add('email', EmailType::class)
-            ->add('motDePasse', PasswordType::class)
+            ->add('password', PasswordType::class)
             ->add('save', SubmitType::class, ['label' => 'Créer un compte'])
         ;
     }

@@ -38,3 +38,24 @@ delete_trick:
     controller: App\Controller\STController::supprimerFigure
     requirements:
         idFigure: '\d+'
+
+add_media:
+    path: /ajouter-un-media/{idFigure}
+    controller: App\Controller\STController::ajoutMedia
+    requirements:
+        idFigure: '\d+'
+
+update_media:
+    path: /modifier-un-media/{idMedia}/{idFigure}
+    controller: App\Controller\STController::modifierMedia
+    requirements:
+        idMedia: '\d+'
+        idFigure: '\d+'
+        
+delete_media:
+    path: /supprimer-un-media/{idMedia}/{idFigure}
+    controller: App\Controller\STController::supprimerMedia
+    requirements:
+        idMedia: '\d+'
+        idFigure: '\d+'
+        

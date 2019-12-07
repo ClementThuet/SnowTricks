@@ -3,7 +3,7 @@
 {% block title %}Accueil - SnowTricks{% endblock %}
 {% block body %}
     {% block content %}
-        <div class="container-fluid">
+       <div class="container-fluid">
             <div class="row" >
                 <div class="col-12">
                     <nav class="navbar navbar-expand-lg navbar-ST" >
@@ -27,32 +27,34 @@
                       </ul>
                     </div>
                   </nav>
-                <hr>
                 </div>
             </div>
         </div>
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <h1 class='text-center'>S'inscrire</h1>
+                    <h1 class='text-center'>Modifier le média : {{media.titre}}</h1>
                     {{ form_start(form) }}
-                    {{ form_errors(form) }}
-                    <div class="form-group">
-                        {{ form_row(form.nom,{'attr':{'class':'form-control','placeholder':'Veuillez saisir votre nom'}}) }}
-                    </div>
-                    <div class="form-group">
-                        {{ form_row(form.prenom,{'attr':{'class':'form-control','placeholder':'Veuillez saisir votre prénom'},'label': 'Prénom'}) }}
-                    </div>
-                    <div class="form-group">
-                        {{ form_row(form.email,{'attr':{'class':'form-control','placeholder':'Veuillez saisir votre email'}}) }}
-                    </div>
-                    <div class="form-group">
-                        {{ form_row(form.password,{'attr':{'class':'form-control','placeholder':'Veuillez saisir votre mot de passe'}}) }}
-                    </div>
-                    <div class="form-group text-center">
-                        {{ form_row(form.save,{'attr':{'class':'btn btn-primary'}}) }}
-                    </div>
-                    {{ form_end(form) }}
+                        {{ form_errors(form) }}
+                        <div class="form-group">
+                            {{ form_row(form.titre,{'attr':{'class':'form-control','placeholder':'Veuillez saisir un titre pour le média'}}) }}
+                        </div>
+                         <div class="form-group">
+                            {{ form_row(form.isImage,{'attr':{'class':''}}) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_row(form.isMainPicture,{'attr':{'class':''}}) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_row(form.url,{'attr':{'class':'form-control','placeholder':"Veuillez saisir l'URL du média, ex : www.imagehost.fr/fazf45azd"}}) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_row(form.alt,{'attr':{'class':'form-control','placeholder':'Veuillez saisir une courte description du média'}}) }}
+                        </div>
+                        <div class="form-group text-center">
+                            {{ form_row(form.save,{'attr':{'class':'btn btn-primary'}}) }}
+                        </div>
+                        {{ form_end(form) }}
                 </div>
             </div>
         </div>

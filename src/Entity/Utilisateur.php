@@ -54,7 +54,7 @@ class Utilisateur implements UserInterface
         return $this->id;
     }
 
-    public function getNom(): string
+    public function getNom()
     {
         return $this->nom;
     }
@@ -66,7 +66,7 @@ class Utilisateur implements UserInterface
         return $this;
     }
 
-    public function getPrenom(): string
+    public function getPrenom()
     {
         return $this->prenom;
     }
@@ -78,7 +78,7 @@ class Utilisateur implements UserInterface
         return $this;
     }
 
-    public function getEmail(): string
+    public function getEmail()
     {
         return $this->email;
     }

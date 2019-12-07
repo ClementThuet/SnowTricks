@@ -23,7 +23,17 @@ class Media
      * @ORM\Column(type="string", length=200)
      */
     private $titre;
+    
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isImage;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isMainPicture;
+    
     /**
      * @ORM\Column(type="string", length=255)
      */
@@ -94,4 +104,30 @@ class Media
 
         return $this;
     }
+    
+    public function getIsImage(): ?bool
+    {
+        return $this->isImage;
+    }
+
+    public function setIsImage(bool $isImage): self
+    {
+        $this->isImage = $isImage;
+
+        return $this;
+    }
+
+    public function getIsMainPicture(): ?bool
+    {
+        return $this->isMainPicture;
+    }
+
+    public function setIsMainPicture(bool $isMainPicture): self
+    {
+        $this->isMainPicture = $isMainPicture;
+
+        return $this;
+    }
+    
+   
 }

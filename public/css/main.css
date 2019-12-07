@@ -5,24 +5,134 @@
     background-repeat: no-repeat;
 }
 .navbar-ST{
-    width:100vw;
-   
+    //width:100vw;
 }
 .navigation-menu{
-    display:inline-flex !important; 
+   display:inline-flex !important; 
    justify-content:flex-end !important;
 }
-#header a,li{
+a:hover {
+    color: black !important;
+    text-decoration: none !important;
+}
+.navbar-brand-homepage-ST{
+    font-size: 2.8em !important;
+    font-family: RobotoCondensedBold, sans-serif;
     color:white;
 }
-.flex{
-    display:flex;
-}
 .navbar-brand-ST{
-    font-size: 2em !important;
+    font-size: 2.8em !important;
+    font-family: RobotoCondensedBold, sans-serif;
+    color:black;
+}
+.nav-link-homepage-ST{
+    font-size: 2.3em;
+    color:white;
+    font-family: RobotoCondensedBold, sans-serif;
+    margin-right:10px;
+   
 }
 .nav-link-ST{
-    font-size: 2em;
+    font-size: 2.3em;
+    color:black;
+    font-family: RobotoCondensedBold, sans-serif;
     margin-right:10px;
 }
+.ST-title{
+    text-align: center;
+    font-family: RobotoCondensedBold, sans-serif;
+    color:black;
+    margin-top:1vh;
+}
+.trick-presentation{
+    display:flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.trick-name{
+    text-align: center;
+    font-family: RobotoCondensedBold, sans-serif;
+    font-size:4rem;
+    color:black;
+    margin-top:1vh;
+}
+.trick-main-picture{
+    max-height:70vh;
+    max-width: 80vw;
+}
+.media-trick{
+    margin-top:2vh;
+    border: 2px solid black;
+}
+.img-trick{
+    width:100%;
+    max-height:23vh;
+}
+.video-trick{
+    width:100%;
+    height:23vh;
+}
+.trick-description{
+    margin-top:2vh;
+    text-align: center;
+    font-family: RobotoCondensedBold, sans-serif;
+    font-size:2rem;
+}
+.trick-author{
+    margin-top:1vh;
+    text-align: right;
+    font-family: RobotoCondensedBold, sans-serif;
+    font-size:1.5rem;
+}
+.form-comment{
+    display:flex;
+    justify-content: center;
+}
+.form-contenu-input{
+    width:60%;
+}
+/*.list-medias-trick{
+    display:flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top:3vh;
+}*/
 
+.glyph-container{
+     display:flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.glyphicon-media{
+    margin-top:3px;
+    color:black;
+    font-size:1vw;
+}
+.glyphicon-remove{
+    color:red;
+    font-size:1vw;
+    margin-top:3px;
+}
+.update-medias-btns{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.medias-btns{
+    margin-top:3vh;
+    margin-right:1vw;
+}
+/*
+.form-group label{
+    text-align: center;
+    font-size: 1.6em;
+    width:100%;
+}
+.form-group input{
+    font-size: 1.6em;
+    width:50%;
+    margin-left:25%;
+}*/

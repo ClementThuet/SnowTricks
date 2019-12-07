@@ -40,6 +40,19 @@ class Figure
     private $groupe;
     
     /**
+     * @Assert\Date
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $dateCreation;
+    
+    /**
+     * @Assert\Date
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $dateDerniereModification;
+    
+    
+    /**
      * @ManyToOne(targetEntity="Utilisateur")
      * @Assert\Type(type="App\Entity\Utilisateur")
      * @Assert\Valid
@@ -47,12 +60,19 @@ class Figure
     private $utilisateur;
     
     /**
+     * @ManyToOne(targetEntity="Utilisateur")
+     * @Assert\Type(type="App\Entity\Utilisateur")
+     * @Assert\Valid
+     */
+    private $dernierUtilisateurModification;
+    
+    /**
      * One figure has many medias. This is the inverse side.
      * @OneToMany(targetEntity="Media", mappedBy="figure", cascade={"persist"})
      */
     private $medias;
-    
-    public function __construct() {
+
+        public function __construct() {
         $this->medias = new ArrayCollection();
     }
     
@@ -60,13 +80,23 @@ class Figure
     {
         return $this->medias;
     }
+    public function getMainPicture()
+    {
+        $medias=$this->getMedias();
+        foreach($medias as $key => $media){
+            if ($media->getIsMainPicture() == true){
+               return $media;
+            }
+        }
+        return $medias[0];
+    }
     
-    public function getId(): ?int
+    public function getId()
     {
         return $this->id;
     }
 
-    public function getNom(): ?string
+    public function getNom()
     {
         return $this->nom;
     }
@@ -78,7 +108,7 @@ class Figure
         return $this;
     }
 
-    public function getDescription(): ?string
+    public function getDescription()
     {
         return $this->description;
     }
@@ -90,12 +120,12 @@ class Figure
         return $this;
     }
 
-    public function getGroupe(): ?string
+    public function getGroupe()
     {
         return $this->groupe;
     }
 
-    public function setGroupe(?string $groupe): self
+    public function setGroupe(string $groupe)
     {
         $this->groupe = $groupe;
 
@@ -124,4 +154,37 @@ class Figure
     {
        $this->medias->removeElement($media);
     }
+    
+    public function getDateCreation()
+    {
+        return $this->dateCreation;
+    }
+
+    public function setDateCreation($dateCreation)
+    {
+        $this->dateCreation = $dateCreation;
+
+        return $this;
+    }
+    
+    public function getDateDerniereModification()
+    {
+        return $this->dateDerniereModification;
+    }
+
+    public function setDateDerniereModification($dateDerniereModification)
+    {
+        $this->dateDerniereModification = $dateDerniereModification;
+
+        return $this;
+    }
+    
+    function getDernierUtilisateurModification() {
+        return $this->dernierUtilisateurModification;
+    }
+
+    function setDernierUtilisateurModification($dernierUtilisateurModification) {
+        $this->dernierUtilisateurModification = $dernierUtilisateurModification;
+    }
+    
 }

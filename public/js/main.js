@@ -22,9 +22,19 @@ jQuery(document).ready(function() {
     });
     // Get the ul that holds the collection of tags
     $collectionHolder = $('ul.medias');
-
     
-
+    
+    
+    //To get the "autre choix" value on groupe figure
+    $('#update_figure_groupe').on('change',function(){
+       var optionValue = $(this).val();
+        var optionText = $('#update_figure_groupe option[value="'+optionValue+'"]').text();
+        if (optionText ==='Autre groupe'){
+            console.log('ok');
+            $( ".dropdownGroupe" ).after( '<input type="text" id="update_figure_groupe" name="update_figure[groupe]" required="required" class="form-control" placeholder="Veuillez saisir le groupe de la figure">' );
+        }
+        //'<input type="text" id="update_figure_groupe" name="update_figure[groupe]" required="required" class="form-control" placeholder="Veuillez saisir le groupe de la figure" value="Rotation">'
+    });
 });
 
 function addMediaForm($collectionHolder, $newLinkLi) {

@@ -62,15 +62,13 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     
     public function checkCredentials($credentials, UserInterface $user)
     {
-        var_dump($user);
-        //dd($this->passwordEncoder->encodePassword($user,'test'));
-        //dd($this->passwordEncoder->isPasswordValid($user, $credentials['password']));
+       
         return $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
     }
     
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
-        return new RedirectResponse($this->router->generate('dashboard'));
+        return new RedirectResponse($this->router->generate('index'));
     }
     
     protected function getLoginUrl()
