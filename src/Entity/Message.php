@@ -35,13 +35,21 @@ class Message
      * @Assert\Valid
      */
     private $utilisateur;
+    
+    /**
+     * @ManyToOne(targetEntity="Figure", inversedBy="messages")
+     * @Assert\Type(type="App\Entity\Figure")
+     * @Assert\Valid
+     */
+    private $figure;
+   
 
-    public function getId(): ?int
+        public function getId()
     {
         return $this->id;
     }
 
-    public function getDate(): ?\DateTimeInterface
+    public function getDate()
     {
         return $this->date;
     }
@@ -53,7 +61,7 @@ class Message
         return $this;
     }
 
-    public function getContenu(): ?string
+    public function getContenu()
     {
         return $this->contenu;
     }
@@ -77,4 +85,11 @@ class Message
         return $this;
     }
     
+    function getFigure() {
+        return $this->figure;
+    }
+
+    function setFigure($figure) {
+        $this->figure = $figure;
+    }
 }

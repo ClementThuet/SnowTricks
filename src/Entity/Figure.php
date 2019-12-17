@@ -68,18 +68,27 @@ class Figure
     
     /**
      * One figure has many medias. This is the inverse side.
-     * @OneToMany(targetEntity="Media", mappedBy="figure", cascade={"persist"})
+     * @OneToMany(targetEntity="Media", mappedBy="figure", cascade={"persist", "remove"})
      */
     private $medias;
+    
+    /**
+     * One figure has many medias. This is the inverse side.
+     * @OneToMany(targetEntity="Message", mappedBy="figure",  cascade={"persist", "remove"})
+    */
+    private $messages;
+    
 
-        public function __construct() {
+    public function __construct() {
         $this->medias = new ArrayCollection();
+        $this->messages = new ArrayCollection();
     }
     
     public function getMedias()
     {
         return $this->medias;
     }
+    
     public function getMainPicture()
     {
         $medias=$this->getMedias();
@@ -88,7 +97,15 @@ class Figure
                return $media;
             }
         }
-        return $medias[0];
+        if($medias[0] != null)
+        {
+            return $medias[0];
+        }
+        else
+        {
+            return null;
+        }
+        
     }
     
     public function getId()
@@ -187,4 +204,18 @@ class Figure
         $this->dernierUtilisateurModification = $dernierUtilisateurModification;
     }
     
+    function getMessages() {
+        return $this->messages;
+    }
+
+    public function addMessage(Message $message)
+    {
+        $message->setFigure($this);
+        $this->messages->add($message);
+    }
+
+    public function removeMessage(Message $message)
+    {
+       $this->messages->removeElement($message);
+    }
 }

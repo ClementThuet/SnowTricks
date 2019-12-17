@@ -19,13 +19,6 @@ class UpdateFigureType extends AbstractType
         $builder
             ->add('nom', TextType::class)
             ->add('description', TextareaType::class)
-            /*->add('groupe', EntityType::class, [
-                'class' => Figure::class,
-                'choice_label' => 'groupe',
-                //'placeholder' => 'Autre groupe',
-                'row_attr' => ['class' => 'dropdownGroupe'],
-                //'choices' => ['Yes' => true]
-            ])*/
             ->add('groupe', TextType::class)
             ->add('save', SubmitType::class, ['label' => 'Enregistrer'])
         ;

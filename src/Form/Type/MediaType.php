@@ -7,6 +7,8 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use App\Entity\Media;
@@ -24,13 +26,35 @@ class MediaType extends AbstractType
                 //'data' => 1,
                 'label' => 'Ce média est-t-il une image ?',
                 'attr' => ['class' => 'custom-control-input']])
-            ->add('isMainPicture', ChoiceType::class,['choices' => array('Oui' => true, 'Non' => false),
+            ->add('isMainPicture', ChoiceType::class,[
+                'choices' => array('Oui' => true, 'Non' => false),
                 'multiple'=>false,
                 'expanded'=>true,
                 'label' => 'Cette image est-t-elle l\'image principale ?',
                 //'data' => 0,
-                'attr' => ['class' => 'custom-control-input']])
-            ->add('url', TextareaType::class, ['label' => 'URL du média','attr' => ['class' => 'form-control']])
+                ])
+            ->add('url', FileType::class, [
+                'label' => 'URL du média',
+                'required'=>false,
+                 // unmapped means that this field is not associated to any entity property
+                'mapped' => false,
+                // make it optional so you don't have to re-upload the PDF file
+                // everytime you edit the Product details
+                'required' => false,
+                // unmapped fields can't define their validation using annotations
+                // in the associated entity, so you can use the PHP constraint classes
+                'constraints' => [
+                    new File([
+                        'maxSize' => '150000k',
+                        'mimeTypes' => [
+                            'image/png',
+                            'image/jpeg',
+                        ],
+                        'mimeTypesMessage' => 'Merci de choisir une image au format jpg ou png',
+                    ])
+                ],
+            ])
+            ->add('urlVideo', TextType::class,['attr' => ['class' => 'form-control'],'mapped'=>false,'required'=>false])
             ->add('alt', TextType::class, ['label' => 'Description alternative','attr' => ['class' => 'form-control']])
             ->add('save', SubmitType::class, ['label' => 'Enregistrer'])
         ;
@@ -40,6 +64,7 @@ class MediaType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Media::class,
+            'allow_extra_fields'=>true
         ]);
     }
 }

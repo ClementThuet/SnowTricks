@@ -1,4 +1,34 @@
-// setup an "add a tag" link
+//Masquer "cette img est-elle l'img principale ?" si la réponse est non à "Ce média est-il une img ?"
+
+$isMainPicture=$('#formRowIsMainPicture');
+$inputUrlImage=$('#inputUrlImage');
+$inputUrlVideo=$('#inputUrlVideo');
+$isImage=$('[name="media[isImage]"]:checked').val();
+if($isImage === '0'){
+    $isMainPicture.hide("fast");
+    $inputUrlImage.hide("fast");
+    $inputUrlVideo=$('#inputUrlVideo').show("fast");
+}
+else{
+    $isMainPicture.show("fast");
+    $inputUrlImage.show("fast");
+    $inputUrlVideo=$('#inputUrlVideo').hide("fast");
+}
+
+$("[name='media[isImage]']").on('change', function() {
+    $isImage=$('[name="media[isImage]"]:checked').val();
+    if($isImage === '0'){
+        $isMainPicture.hide("fast");
+        $inputUrlImage.hide("fast");
+        $inputUrlVideo=$('#inputUrlVideo').show("fast");
+    }
+    else{
+        $isMainPicture.show("fast");
+        $inputUrlImage.show("fast");
+        $inputUrlVideo=$('#inputUrlVideo').hide("fast");
+    }
+});
+/* setup an "add a tag" link
 var $addMediaButton=$('.add_media_link');
 //var $newLinkLi = $('<li></li>').append($addMediaButton);
 var $newLinkLi = $('<li></li>');
@@ -34,7 +64,7 @@ jQuery(document).ready(function() {
             $( ".dropdownGroupe" ).after( '<input type="text" id="update_figure_groupe" name="update_figure[groupe]" required="required" class="form-control" placeholder="Veuillez saisir le groupe de la figure">' );
         }
         //'<input type="text" id="update_figure_groupe" name="update_figure[groupe]" required="required" class="form-control" placeholder="Veuillez saisir le groupe de la figure" value="Rotation">'
-    });*/
+    });
     
     
 });
@@ -74,4 +104,4 @@ function addMediaFormDeleteLink($mediaFormLi) {
         // remove the li for the tag form
         $mediaFormLi.remove();
     });
-}
+}*/

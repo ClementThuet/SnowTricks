@@ -3,7 +3,7 @@
 {% block title %}Accueil - SnowTricks{% endblock %}
 {% block body %}
     {% block content %}
-        <div class="container-fluid" id='header'>
+        <div class="container-fluid" id='header' style="background-image: url('{{asset('img/WP_snow1.jpg')}}')">
             <div class="row" >
                 <div class="col-12">
                     <nav class="navbar navbar-expand-lg navbar-ST" >
@@ -11,17 +11,18 @@
                     <div class="collapse navbar-collapse navigation-menu" id="navbarSupportedContent" >
                       <ul class="navbar-nav ">
                         <li class="nav-item active ">
-                          <a class=" nav-link-homepage-ST " href="/SnowTricks/public/">Les figures <span class="sr-only">(current)</span></a>
+                          <a class=" nav-link-homepage-ST " href="/">Les figures <span class="sr-only">(current)</span></a>
                         </li>
-                        <li class="nav-item">
-                          <a class=" nav-link-homepage-ST" href="/SnowTricks/public/inscription">S'inscrire</a>
-                        </li>
-                        <li class="nav-item">
-                          <a class=" nav-link-homepage-ST"  href="/SnowTricks/public/connexion">Connexion</a>
-                        </li>
-                        {%if is_granted('IS_AUTHENTICATED_FULLY') == true %}
+                        {%if app.user %}
                             <li class="nav-item">
-                              <a class=" nav-link-homepage-ST"  href="/SnowTricks/public/deconnexion">Déconnexion</a>
+                              <a class=" nav-link-homepage-ST"  href="/deconnexion">Déconnexion</a>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a class=" nav-link-homepage-ST" href="/inscription">S'inscrire</a>
+                            </li>
+                            <li class="nav-item">
+                              <a class=" nav-link-homepage-ST"  href="/connexion">Connexion</a>
                             </li>
                         {%endif%}
                         {#{%if is_granted('IS_AUTHENTICATED_FULLY') == true %}
@@ -45,6 +46,13 @@
                 </div>
             </div>
             <div class="row">
+                <div class="col-12">
+                    {% for message in app.flashes('successDeleteTrick') %}
+                        <div class="alert alert-success">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
                 {%if figures is defined%}
                         {% for figure in figures %}
                             <div class="col-2">
@@ -54,15 +62,15 @@
                                         {%if figure.mainPicture.url is defined %}
                                             <img class="img-trick" src="{{figure.mainPicture.url}}" alt="{{figure.mainPicture.alt}}">
                                         {%else%}
-                                            <img class="img-trick" src="/SnowTricks/public/img/default-image.jpg" alt="Image par défaut">
+                                            <img class="img-trick" src="{{asset('img/default-image.jpg')}}" alt="Image par défaut">
                                         {%endif%}
                                         <br>
                                         <div class="glyph-container">
-                                            <a href="/SnowTricks/public/modifier-une-figure/{{figure.id}}">
-                                                <span class="glyphicon glyphicon-pencil glyphicon-media" aria-hidden="true"></span>
+                                            <a href="/modifier-une-figure/{{figure.id}}">
+                                                <i class="material-icons glyphicon-media">create</i>
                                             </a>
-                                            <a href="/SnowTricks/public/supprimer-une-figure/{{figure.id}}">
-                                                <span class="glyphicon glyphicon-remove " aria-hidden="true"></span>
+                                            <a href="/supprimer-une-figure/{{figure.id}}">
+                                               <i class="material-icons glyphicon-remove">clear</i>
                                             </a>
                                         </div>
                                     </div>
@@ -70,8 +78,13 @@
                             </div>
                         {%endfor%}
                 {%endif%}
+                
             </div>
         </div>
-                    
+        <div class="bt-add-trick">
+            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+            <a href="/ajouter-une-figure"><i class="material-icons">add</i></a>
+            <span>Ajouter une figure</span>
+        </div>            
     {% endblock %}
 {% endblock %}

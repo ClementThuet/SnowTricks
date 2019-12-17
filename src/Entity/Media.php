@@ -64,12 +64,12 @@ class Media
         return $this;
     }
     
-    public function getId(): ?int
+    public function getId()
     {
         return $this->id;
     }
 
-    public function getTitre(): ?string
+    public function getTitre()
     {
         return $this->titre;
     }
@@ -81,7 +81,7 @@ class Media
         return $this;
     }
 
-    public function getUrl(): ?string
+    public function getUrl()
     {
         return $this->url;
     }

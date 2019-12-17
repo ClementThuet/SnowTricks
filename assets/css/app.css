@@ -1,11 +1,11 @@
 #header{
     min-height:100vh;
     min-width:100vw;
-    background-image: url('../img/WP_snow1.jpg');
+    /*background-image: url('/Snowtricks/public/img/WP_snow1.jpg');*/
     background-repeat: no-repeat;
 }
 .navbar-ST{
-    //width:100vw;
+    /*width:100vw;*/
 }
 .navigation-menu{
    display:inline-flex !important; 
@@ -72,6 +72,7 @@ a:hover {
 }
 .media-trick{
     margin-top:2vh;
+    margin-bottom:2vh;
     border: 2px solid black;
 }
 .img-trick{
@@ -133,6 +134,13 @@ a:hover {
 .medias-btns{
     margin-top:3vh;
     margin-right:1vw;
+}
+.img-update-media{
+    width:50vw;
+}
+.video-update-media{
+    min-width:50vw;
+    min-height:30vh;
 }
 /*
 .form-group label{

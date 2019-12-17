@@ -7,21 +7,22 @@
             <div class="row" >
                 <div class="col-12">
                     <nav class="navbar navbar-expand-lg navbar-ST" >
-                    <a class="navbar-brand navbar-brand-ST" href="/SnowTricks/public/">SnowTricks</a>
+                    <a class="navbar-brand navbar-brand-ST" href="/">SnowTricks</a>
                     <div class="collapse navbar-collapse navigation-menu" id="navbarSupportedContent" >
                       <ul class="navbar-nav ">
                         <li class="nav-item active ">
-                          <a class=" nav-link-ST " href="/SnowTricks/public/">Les figures <span class="sr-only">(current)</span></a>
+                          <a class=" nav-link-ST " href="/">Les figures <span class="sr-only">(current)</span></a>
                         </li>
-                        <li class="nav-item">
-                          <a class=" nav-link-ST" href="/SnowTricks/public/inscription">S'inscrire</a>
-                        </li>
-                        <li class="nav-item">
-                          <a class=" nav-link-ST"  href="/SnowTricks/public/connexion">Connexion</a>
-                        </li>
-                        {%if is_granted('IS_AUTHENTICATED_FULLY') == true %}
+                        {%if app.user %}
                             <li class="nav-item">
-                              <a class=" nav-link-ST"  href="/SnowTricks/public/deconnexion">Déconnexion</a>
+                              <a class=" nav-link-ST"  href="/deconnexion">Déconnexion</a>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a class=" nav-link-ST" href="/inscription">S'inscrire</a>
+                            </li>
+                            <li class="nav-item">
+                              <a class=" nav-link-ST"  href="/connexion">Connexion</a>
                             </li>
                         {%endif%}
                       </ul>
@@ -33,7 +34,13 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
+                    
                     <h1 class='ST-title'>Modifier le trick : {{figure.nom}}</h1>
+                    {% for message in app.flashes('successMediaTrick') %}
+                        <div class="alert alert-success">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
                     {{ form_start(form) }}
                         {{ form_errors(form) }}
                         <div class="form-group">
@@ -59,17 +66,17 @@
                             {%if media.isImage == true%}
                                 <img class="img-trick" src="{{media.url}}" alt="{{media.alt}}">
                             {%else%}
-                                <iframe class="video-trick"
+                                <iframe class="video-trick" 
                                     src="{{media.url}}">
                                 </iframe>
                             {%endif%}
                             <br>
                             <div class="glyph-container">
-                                <a href="/SnowTricks/public/modifier-un-media/{{media.id}}/{{figure.id}}">
-                                    <span class="glyphicon glyphicon-pencil glyphicon-media" aria-hidden="true"></span>
+                                <a href="/modifier-un-media/{{media.id}}/{{figure.id}}">
+                                     <i class="material-icons glyphicon-media">create</i>
                                 </a>
-                                <a href="/SnowTricks/public/supprimer-un-media/{{media.id}}/{{figure.id}}">
-                                    <span class="glyphicon glyphicon-remove " aria-hidden="true"></span>
+                                <a href="/supprimer-un-media/{{media.id}}/{{figure.id}}">
+                                    <i class="material-icons glyphicon-remove">clear</i>
                                 </a>
                             </div>
 
@@ -82,10 +89,11 @@
                 </ul>
             </div>#}
             <div class="form-group update-medias-btns">
-                <a href="/SnowTricks/public/figure/{{figure.nom}}">
+                <button type="button" class="add_media_link btn btn-primary medias-btns" onclick="window.history.back()">Retour</button>
+                <a href="/figure/{{figure.nom}}">
                     <button type="button" class="add_media_link btn btn-primary medias-btns">Voir la figure</button>
-                 </a>
-                <a href="/SnowTricks/public/ajouter-un-media/{{figure.id}}">
+                </a>
+                <a href="/ajouter-un-media/{{figure.id}}">
                     <button type="button" class="add_media_link btn btn-primary medias-btns">Ajouter un media</button>
                  </a>
                 {{ form_row(form.save,{'attr':{'class':'btn btn-primary medias-btns'}}) }}
