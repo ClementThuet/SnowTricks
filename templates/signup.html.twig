@@ -52,6 +52,9 @@
                     </div>
                     <div class="form-group text-center">
                         {{ form_row(form.save,{'attr':{'class':'btn btn-primary'}}) }}
+                        <div>
+                            <a  href="{{ path('app_login') }}">Déjà un compte ?</a>
+                        </div>
                     </div>
                     {{ form_end(form) }}
                 </div>

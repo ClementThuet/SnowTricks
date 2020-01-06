@@ -8,19 +8,25 @@ figure:
        
 app_login:
     path: /connexion
-    controller: App\Controller\STController::login   
+    controller: App\Controller\STController::login 
     
+forgotten_password:
+    path: /mot-de-passe-oublie
+    controller: App\Controller\UserController::motDePasseOublie
+
+reset_password:
+    path: /reinitialiser-mon-mot-de-passe/{resetPasswordToken}
+    controller: App\Controller\UserController::reinitialiserMotDePasse    
+    requirements:
+        resetPasswordToken: '\w+'
+        
 signup:
     path: /inscription
-    controller: App\Controller\STController::signup
+    controller: App\Controller\UserController::signup
     
 app_logout:
     path: /deconnexion
     controller: App\Controller\STController::deconnexion
-    
-dashboard:
-    path: /tableau-de-bord
-    controller: App\Controller\STController::dashboard
     
 add_trick:
     path: /ajouter-une-figure
@@ -59,3 +65,14 @@ delete_media:
         idMedia: '\d+'
         idFigure: '\d+'
         
+profil_membre:
+    path: /profil-membre/{idUtilisateur}
+    controller: App\Controller\STController::AfficherProfilMembre
+    requirements:
+        idUtilisateur: '\d+'
+
+activer_compte:
+    path: /activer-mon-compte/{token}
+    controller: App\Controller\UserController::ActiverCompte
+    requirements:
+        token: '\w'

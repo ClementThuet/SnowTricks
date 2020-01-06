@@ -7,6 +7,8 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use App\Entity\Utilisateur;
@@ -20,7 +22,7 @@ class UtilisateurType extends AbstractType
             ->add('prenom', TextType::class)
             ->add('email', EmailType::class)
             ->add('password', PasswordType::class)
-            ->add('save', SubmitType::class, ['label' => 'Créer un compte'])
+            ->add('save', SubmitType::class, ['label' => 'Enregistrer'])
         ;
     }
     
