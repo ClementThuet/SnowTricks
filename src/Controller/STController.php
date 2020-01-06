@@ -9,6 +9,7 @@ use App\Entity\Media;
 use App\Entity\Message;
 use App\Form\Type\MessageType;
 use App\Form\Type\UtilisateurType;
+use App\Form\Type\EditUtilisateurType;
 use App\Form\Type\UpdateFigureType;
 use App\Form\Type\FigureType;
 use App\Form\Type\MediaType;
@@ -32,7 +33,7 @@ class STController extends AbstractController{
     public function afficherFigure($nomFigure,Request $request){
         
         $entityManager = $this->getDoctrine()->getManager();
-        $figure= $entityManager->getRepository(Figure::class)->findOneBy(['nom' => $nomFigure]);;
+        $figure= $entityManager->getRepository(Figure::class)->findOneBy(['nom' => $nomFigure]);
         $medias=$figure->getMedias();
         $messages=$figure->getMessages();
         
@@ -54,25 +55,7 @@ class STController extends AbstractController{
         return $this->render('figure.html.twig',['figure'=>$figure, 'medias'=>$medias,'messages'=>$messages,'form' => $form->createView()]);
     }
     
-    //Affiche la page d'inscription
-    public function signup(Request $request){
-        
-        $utilisateur = new Utilisateur;
-        $form = $this->createForm(UtilisateurType::class, $utilisateur);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $utilisateur = $form->getData();
-            $notHashedPassword=$utilisateur->getMotDePasse();
-            $utilisateur->setPassword(password_hash($notHashedPassword, PASSWORD_DEFAULT));
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($utilisateur);
-            $entityManager->flush();
-            return $this->redirectToRoute('Connexion');
-        }
-        return $this->render('signup.html.twig', [
-            'form' => $form->createView(),
-        ]);
-    }
+    
     
     //Affiche la page de login 
      public function login(AuthenticationUtils $authenticationUtils)
@@ -250,5 +233,48 @@ class STController extends AbstractController{
         $this->addFlash('successMediaTrick', 'Média supprimé avec succès.');
         return $this->redirect('/modifier-une-figure/'.$idFigure.'');
     }
+    
+    public function afficherProfilMembre($idUtilisateur, Request $request){
+        
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $entityManager = $this->getDoctrine()->getManager();
+        $utilisateur = $entityManager->getRepository(Utilisateur::class)->find($idUtilisateur);
+        $form = $this->createForm(EditUtilisateurType::class, $utilisateur);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $imageUploaded = $form['urlPhoto']->getData();
+
+            if ($imageUploaded) {
+                $originalFilename = pathinfo($imageUploaded->getClientOriginalName(), PATHINFO_FILENAME);
+                // this is needed to safely include the file name as part of the URL
+                $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$imageUploaded->guessExtension();
+               
+                // Move the file to the directory where brochures are stored
+                try {
+                    $imageUploaded->move(
+                        $this->getParameter('users_pictures'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    $this->addFlash('successEditUtilisateur', 'Erreur lors de l\'upload de la photo, veuillez réesayer.'.$e);
+                    return $this->redirect('/profil-membre/'.$idUtilisateur.'');
+                }
+                // updates the property to store the file name
+                $utilisateur->setUrlPhoto('/img/users_pictures/'.$newFilename);
+            } 
+            $entityManager->persist($utilisateur);
+            $entityManager->persist($utilisateur);
+            $entityManager->flush();
+            $this->addFlash('successEditUtilisateur', 'Profil utilisateur mise à jour avec succès.');
+            return $this->redirect('/profil-membre/'.$idUtilisateur.'');
+        }
+        return $this->render('profilMembre.html.twig', [
+            'form' => $form->createView(),
+            'user' => $utilisateur
+        ]);
+    }
+    
+    
     
 }

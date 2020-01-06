@@ -1,16 +1,45 @@
-#header{
-    min-height:100vh;
-    min-width:100vw;
-    /*background-image: url('/Snowtricks/public/img/WP_snow1.jpg');*/
-    background-repeat: no-repeat;
+.img-banner-container{
+    height:100vh;
+    background-position: center;
+    background-size: cover;
 }
-.navbar-ST{
-    /*width:100vw;*/
+.ST-main-title{
+    font-family: 'Lato', sans-serif;
+    color:#ededed;
+    font-size:4.5rem;
+    font-weight: bold;
+    margin-top:1vh;
+    text-align: center;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
-.navigation-menu{
-   display:inline-flex !important; 
-   justify-content:flex-end !important;
+.ST-subtitle{
+    font-family: 'Lato', sans-serif;
+    font-size:2.5rem;
+    font-weight: bold;
+    margin-top:25vh;
+    text-align: center;
+    color:#ededed;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
+.nav-link-homepage-ST{
+    font-size: 2rem;
+    color:#ededed;
+    font-family: 'Lato', sans-serif;
+    margin-right:2vw;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+   
+}
+.navbar-container-menu-md-plus{
+    display:flex;
+    width:100%;
+    justify-content: flex-end; 
+    align-items:center;
+    padding: .5rem 1rem;
+    flex-wrap: wrap;
+    margin-bottom:2vh;
+    list-style: none;
+}
+
 a:hover {
     color: black !important;
     text-decoration: none !important;
@@ -25,24 +54,18 @@ a:hover {
     font-family: RobotoCondensedBold, sans-serif;
     color:black;
 }
-.nav-link-homepage-ST{
-    font-size: 2.3em;
-    color:white;
-    font-family: RobotoCondensedBold, sans-serif;
-    margin-right:10px;
-   
-}
-.nav-link-ST{
-    font-size: 2.3em;
-    color:black;
-    font-family: RobotoCondensedBold, sans-serif;
-    margin-right:10px;
-}
+
+
 .ST-title{
     text-align: center;
     font-family: RobotoCondensedBold, sans-serif;
     color:black;
     margin-top:1vh;
+}
+.img-user{
+    width:80px;
+        height:80px;
+    border-radius: 50%;
 }
 .bt-add-trick{
     position: fixed;
@@ -142,14 +165,51 @@ a:hover {
     min-width:50vw;
     min-height:30vh;
 }
-/*
-.form-group label{
-    text-align: center;
-    font-size: 1.6em;
-    width:100%;
+
+/* Spécifique à l'affichage mobile */
+@media screen and (max-width: 576px) {
+    .menu-md-plus{
+        display: none;
+    }
+    .navbar-container-menu-md-less{
+        display:flex;
+        justify-content:space-around;
+        align-items:center;
+        padding: .5rem 1rem;
+        flex-wrap: wrap;
+        margin-bottom:2vh;
+        list-style: none;
+        border: 1px solid black;
+    }
+    .img-banner-container{
+        height:33vh;
+        background-position: center;
+        background-size: cover;
+    }
+    .ST-main-title{
+        font-family: 'Lato', sans-serif;
+        color:white;
+        margin-top:1vh;
+        text-align: center;
+        text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    }
+    .ST-subtitle{
+        font-family: 'Lato', sans-serif;
+        margin-top:5vh;
+        text-align: center;
+        color:white;
+        text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    }
+    .icons-menu-mobile{
+        color:black;
+        font-size:6vw;
+    }
 }
-.form-group input{
-    font-size: 1.6em;
-    width:50%;
-    margin-left:25%;
-}*/
+/* Spécifique à l'affichage md + */
+@media screen and (min-width: 576px) {
+    .menu-md-less{
+        display: none;
+    }
+    
+    
+}

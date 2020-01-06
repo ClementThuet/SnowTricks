@@ -27,7 +27,7 @@ class Utilisateur implements UserInterface
     private $nom;
 
     /**
-     * @ORM\Column(type="string", length=35, nullable=true)
+     * @ORM\Column(type="string", length=35)
      */
     private $prenom;
 
@@ -48,6 +48,26 @@ class Utilisateur implements UserInterface
      * @ORM\Column(type="json")
      */
     private $roles = [];
+    
+    /**
+     * @ORM\Column(type="string", length=200, nullable=true)
+     */
+    private $urlPhoto;
+    
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $isAccountActive;
+    
+    /**
+     * @ORM\Column(type="string", length=60, nullable=true)
+     */
+    private $registrationToken;
+
+    /**
+     * @ORM\Column(type="string", length=60, nullable=true)
+     */
+    private $resetToken;
     
     public function getId(): int
     {
@@ -149,4 +169,40 @@ class Utilisateur implements UserInterface
         // $this->plainPassword = null;
     }
     
+    function getUrlPhoto() {
+        return $this->urlPhoto;
+    }
+
+    function setUrlPhoto($urlPhoto) {
+        $this->urlPhoto = $urlPhoto;
+    }
+    function getIsAccountActive() {
+        return $this->isAccountActive;
+    }
+
+    function getRegistrationToken() {
+        return $this->registrationToken;
+    }
+
+    function setIsAccountActive($isAccountActive) {
+        $this->isAccountActive = $isAccountActive;
+    }
+
+    function setRegistrationToken($registrationToken) {
+        $this->registrationToken = $registrationToken;
+    }
+
+    public function getResetToken()
+    {
+        return $this->resetToken;
+    }
+
+    public function setResetToken($resetToken)
+    {
+        $this->resetToken = $resetToken;
+
+        return $this;
+    }
+
+
 }

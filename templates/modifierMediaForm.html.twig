@@ -11,9 +11,13 @@
                     <div class="collapse navbar-collapse navigation-menu" id="navbarSupportedContent" >
                       <ul class="navbar-nav ">
                         <li class="nav-item active ">
-                          <a class=" nav-link-ST " href="/">Les figures <span class="sr-only">(current)</span></a>
+                          <a class=" nav-link-homepage-ST " href="/#les-figures">Les figures <span class="sr-only">(current)</span></a>
                         </li>
                         {%if app.user %}
+                            <li class="nav-item">
+                                <img src="{{app.user.urlPhoto}}" alt="Photo de {{app.user.prenom }} {{app.user.nom}}" class="img-user rounded-circle">
+                                <a href="/profil-membre/{{app.user.id}}"><div>{{app.user.prenom}} {{app.user.nom}}</div></a>
+                            </li>
                             <li class="nav-item">
                               <a class=" nav-link-ST"  href="/deconnexion">Déconnexion</a>
                             </li>
