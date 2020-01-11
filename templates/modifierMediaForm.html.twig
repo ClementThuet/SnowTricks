@@ -3,58 +3,108 @@
 {% block title %}Accueil - SnowTricks{% endblock %}
 {% block body %}
     {% block content %}
-       <div class="container-fluid">
+        <div class="container-fluid">
             <div class="row" >
-                <div class="col-12">
-                    <nav class="navbar navbar-expand-lg navbar-ST" >
-                    <a class="navbar-brand navbar-brand-ST" href="/">SnowTricks</a>
-                    <div class="collapse navbar-collapse navigation-menu" id="navbarSupportedContent" >
-                      <ul class="navbar-nav ">
-                        <li class="nav-item active ">
-                          <a class=" nav-link-homepage-ST " href="/#les-figures">Les figures <span class="sr-only">(current)</span></a>
-                        </li>
-                        {%if app.user %}
-                            <li class="nav-item">
-                                <img src="{{app.user.urlPhoto}}" alt="Photo de {{app.user.prenom }} {{app.user.nom}}" class="img-user rounded-circle">
-                                <a href="/profil-membre/{{app.user.id}}"><div>{{app.user.prenom}} {{app.user.nom}}</div></a>
+                <div class="col-lg-12 menu-md-plus-AP">
+                    <nav class="navbar-AP" >
+                        <ul class="navbar-container-menu-md-plus-AP">
+                            <a class="navbar-brand navbar-brand-AP" href="/">SnowTricks</a>
+                            <li>
+                              <a class="nav-link-AP" href="/">Accueil</a>
                             </li>
-                            <li class="nav-item">
-                              <a class=" nav-link-ST"  href="/deconnexion">Déconnexion</a>
-                            </li>
-                        {% else %}
-                            <li class="nav-item">
-                                <a class=" nav-link-ST" href="/inscription">S'inscrire</a>
-                            </li>
-                            <li class="nav-item">
-                              <a class=" nav-link-ST"  href="/connexion">Connexion</a>
-                            </li>
-                        {%endif%}
-                      </ul>
-                    </div>
-                  </nav>
+                            {%if app.user %}
+                                <a class="nav-link-AP" href="/profil-membre/{{app.user.id}}">{{app.user.prenom}} {{app.user.nom}}</a>
+                                <li>
+                                  <a class="nav-link-AP"  href="/deconnexion">Déconnexion</a>
+                                </li>
+                            {% else %}
+                                <li>
+                                    <a class="nav-link-AP" href="/inscription">S'inscrire</a>
+                                </li>
+                                <li>
+                                  <a class="nav-link-AP"  href="/connexion">Connexion</a>
+                                </li>
+                            {%endif%}
+                        </ul>
+                    </nav>
+                </div>
+                {# Menu mobile #}
+                <div class="col-12 menu-md-less">
+                    <nav class=" fixed-bottom navbar-mobile navbar-light" >
+                            <ul class="navbar-container-menu-md-less" >
+                                {%if app.user %}
+                                    <li class="element-menu-md-less " id="photo-utilisateur">
+                                        <a href="/profil-membre/{{app.user.id}}"><i class="fas fa-user-circle icons-menu-mobile"></i></a>
+                                    </li>
+                                    <li class="element-menu-md-less active ">
+                                        <a class=" " href="/"><span class="fas fa-home icons-menu-mobile"></span> </a>
+                                      </li>
+                                    <li class="element-menu-md-less">
+                                      <a class=" "  href="/deconnexion"><i class="fas fa-sign-out-alt icons-menu-mobile"></i></a>
+                                    </li>
+                                {% else %}
+                                    <li class="element-menu-md-less">
+                                        <a class=" nav-link-homepage-ST" href="/inscription"><i class="fas fa-user-plus icons-menu-mobile"></i></a>
+                                    </li>
+                                    <li class="element-menu-md-less active ">
+                                        <a class=" " href="/"><span class="fas fa-home icons-menu-mobile"></span> </a>
+                                      </li>
+                                    <li class="element-menu-md-less">
+                                      <a class=" "  href="/connexion"><i class="fas fa-sign-in-alt icons-menu-mobile"></i></a>
+                                    </li>
+                                {%endif%}
+                          </ul>
+                    </nav>
                 </div>
             </div>
         </div>
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <h1 class='text-center'>Modifier le média : {{media.titre}}</h1>
+                    <h1 class='ST-title'>Modifier le média : {{media.titre}}</h1>
                     {{ form_start(form) }}
                         {{ form_errors(form) }}
                         <div class="form-group">
-                            {{ form_row(form.titre,{'attr':{'class':'form-control','placeholder':'Veuillez saisir un titre pour le média'}}) }}
+                            {{ form_label(form.titre, 'Titre', {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(form.titre,{'attr':{'class':'form-control','placeholder':'Veuillez saisir un titre pour le média','required': 'required', 'autofocus':'autofocus'}}) }}
+                            <small>{{ form_help(form.titre) }}</small>
+                            <div class="form-error">
+                                {{ form_errors(form.titre) }}
+                            </div>
                         </div>
-                         <div class="form-group">
-                            {{ form_row(form.isImage,{'attr':{'class':''}}) }}
+                        <div class="form-group">
+                            {{ form_label(form.isImage, 'Ce média est-il une image ?', {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(form.isImage,{'attr':{'class':'yesNo-btns'}}) }}
+                            <small>{{ form_help(form.isImage) }}</small>
+                            <div class="form-error">
+                                {{ form_errors(form.isImage) }}
+                            </div>
                         </div>
                         <div class="form-group" id="formRowIsMainPicture">
-                            {{ form_row(form.isMainPicture,{'attr':{'class':''}}) }}
+                            {{ form_label(form.isMainPicture, "Cette image est-elle l'image principale ?", {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(form.isMainPicture,{'attr':{'class':'yesNo-btns'}}) }}
+                            <small>{{ form_help(form.isMainPicture) }}</small>
+                            <div class="form-error">
+                                {{ form_errors(form.isMainPicture) }}
+                            </div>
                         </div>
                         <div class="form-group" id="inputUrlImage">
-                            {{ form_row(form.url,{'attr':{'class':'form-control'}}) }}
+                            {{ form_label(form.url, "Séléctionner le fichier", {'label_attr': {'class': 'form-label'}}) }}
+                            <br>
+                            {{ form_widget(form.url,{'attr':{'class':''}}) }}
+                            <small>{{ form_help(form.url) }}</small>
+                            <div class="form-error">
+                                {{ form_errors(form.url) }}
+                            </div>
                         </div>
                         <div class="form-group" id="inputUrlVideo">
-                            {{ form_row(form.urlVideo,{'attr':{'class':'form-control','placeholder':'Exemple : https://www.youtube.com/embed/SQyTWk7OxSI'}}) }}
+                            {{ form_label(form.urlVideo, "Saisissez l'URL de la vidéo", {'label_attr': {'class': 'form-label'}}) }}
+                            <br>
+                            {{ form_widget(form.urlVideo,{'attr':{'class':'form-control','placeholder':'Exemple : https://www.youtube.com/embed/SQyTWk7OxSI'}}) }}
+                            <small>{{ form_help(form.urlVideo) }}</small>
+                            <div class="form-error">
+                                {{ form_errors(form.urlVideo) }}
+                            </div>
                         </div>
                         {%if media.isImage == true%}
                             <div class="text-center">
@@ -68,11 +118,17 @@
                             </div>
                         {%endif%}
                         <div class="form-group">
-                            {{ form_row(form.alt,{'attr':{'class':'form-control','placeholder':'Veuillez saisir une courte description du média'}}) }}
+                            {{ form_label(form.alt, "Description du média", {'label_attr': {'class': 'form-label'}}) }}
+                            <br>
+                            {{ form_widget(form.alt,{'attr':{'class':'form-control','placeholder':'Veuillez saisir une courte description du média'}}) }}
+                            <small>{{ form_help(form.alt) }}</small>
+                            <div class="form-error">
+                                {{ form_errors(form.alt) }}
+                            </div>
                         </div>
                         <div class="form-group update-medias-btns">
-                            <button type="button" class="add_media_link btn btn-primary medias-btns" onclick="window.history.back()">Retour</button>
-                            {{ form_row(form.save,{'attr':{'class':'btn btn-primary medias-btns'}}) }}
+                            <button type="button" class="add_media_link btn  medias-btns" onclick="window.history.back()">Retour</button>
+                            {{ form_row(form.save,{'attr':{'class':'btn medias-btns'}}) }}
                         </div>
                         {{ form_end(form) }}
                 </div>

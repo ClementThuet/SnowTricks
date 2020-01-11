@@ -14,6 +14,5 @@ require('../css/app.css');
 /*import $ from 'jquery';
 global.$ = $;
 import 'bootstrap';*/
-console.log('Webpack Encore is running');
 
 

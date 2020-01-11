@@ -67,6 +67,7 @@ class UserController extends AbstractController
         if($utilisateur)
         {
             $utilisateur->setIsAccountActive(true);
+            $utilisateur->setUrlPhoto('/img/default-user-profile-image.png');
             $entityManager->persist($utilisateur);
             $entityManager->flush();
             $this->addFlash('successActivateAccount', 'Le lien sur lequel vous avez cliqué ne correspond à aucun utilisateur, merci de réesayer.');
