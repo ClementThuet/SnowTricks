@@ -6,43 +6,46 @@
         <div class="container-fluid"  >
             <div class="row" >
                 <div class="col-12 menu-md-plus img-banner-container" style="background-image: url('{{asset('img/WP_snow4.jpg')}}');">
-                    
-                    <nav class="navbar  navbar-ST" >
-                            <ul class="navbar-container-menu-md-plus">
-                                <li class="">
-                                  <a class=" nav-link-homepage-ST" href="/">Accueil</a>
+                    <nav class="navbar" >
+                        <ul class="navbar-container-menu-md-plus">
+                            <li>
+                              <a class=" nav-link-homepage-ST" href="/">Accueil</a>
+                            </li>
+                            {%if app.user %}
+                                <a class=" nav-link-homepage-ST" href="/profil-membre/{{app.user.id}}">{{app.user.prenom}} {{app.user.nom}}</a>
+                                <li>
+                                  <a class=" nav-link-homepage-ST"  href="/deconnexion">Déconnexion</a>
                                 </li>
-                                {%if app.user %}
-                                    {#<img src="{{app.user.urlPhoto}}" alt="Photo de {{app.user.prenom }} {{app.user.nom}}" class="img-user ">#}
-                                    <a class=" nav-link-homepage-ST" href="/profil-membre/{{app.user.id}}">{{app.user.prenom}} {{app.user.nom}}</a>
-                                    <li class="nav-item">
-                                      <a class=" nav-link-homepage-ST"  href="/deconnexion">Déconnexion</a>
-                                    </li>
-                                {% else %}
-                                    <li class="nav-item">
-                                        <a class=" nav-link-homepage-ST" href="/inscription">S'inscrire</a>
-                                    </li>
-                                    <li class="nav-item">
-                                      <a class=" nav-link-homepage-ST"  href="/connexion">Connexion</a>
-                                    </li>
-                                {%endif%}
-                          </ul>
+                            {% else %}
+                                <li>
+                                    <a class="nav-link-homepage-ST" href="/inscription">S'inscrire</a>
+                                </li>
+                                <li>
+                                  <a class="nav-link-homepage-ST"  href="/connexion">Connexion</a>
+                                </li>
+                            {%endif%}
+                        </ul>
                     </nav>
-                          <h1 class="ST-main-title" >Snowtricks</h1>
+                    <h1 class="ST-main-title" >Snowtricks</h1>
                     <h3 class="ST-subtitle">Ensemble partageons nos connaissances sur le snowboard freestyle</h3>
+                    <a href="#les-figures">
+                        <div class="arrow-scroll-down">
+                            <i class="fas fa-arrow-circle-down"></i>
+                        </div>
+                    </a>
                 </div>
                 <div class="col-12 menu-md-less img-banner-container" style="background-image: url('{{asset('img/WP_snow4.jpg')}}');">
                     <h1 class="ST-main-title" >Snowtricks</h1>
                     <h3 class="ST-subtitle">Ensemble partageons nos connaissances sur le snowboard freestyle</h3>
-                    <nav class=" fixed-bottom bg-light navbar-light" >
+                    <nav class=" fixed-bottom navbar-mobile navbar-light" >
                             <ul class="navbar-container-menu-md-less" >
-                                <li class="element-menu-md-less active ">
-                                  <a class=" " href="/"><span class="fas fa-home icons-menu-mobile"></span> </a>
-                                </li>
                                 {%if app.user %}
                                     <li class="element-menu-md-less " id="photo-utilisateur">
                                         <a href="/profil-membre/{{app.user.id}}"><i class="fas fa-user-circle icons-menu-mobile"></i></a>
                                     </li>
+                                    <li class="element-menu-md-less active ">
+                                        <a class=" " href="/"><span class="fas fa-home icons-menu-mobile"></span> </a>
+                                      </li>
                                     <li class="element-menu-md-less">
                                       <a class=" "  href="/deconnexion"><i class="fas fa-sign-out-alt icons-menu-mobile"></i></a>
                                     </li>
@@ -50,6 +53,9 @@
                                     <li class="element-menu-md-less">
                                         <a class=" nav-link-homepage-ST" href="/inscription"><i class="fas fa-user-plus icons-menu-mobile"></i></a>
                                     </li>
+                                    <li class="element-menu-md-less active ">
+                                        <a class=" " href="/"><span class="fas fa-home icons-menu-mobile"></span> </a>
+                                      </li>
                                     <li class="element-menu-md-less">
                                       <a class=" "  href="/connexion"><i class="fas fa-sign-in-alt icons-menu-mobile"></i></a>
                                     </li>
@@ -60,7 +66,7 @@
             </div>
         </div>
         
-        <div class="container-fluid">
+        <div class="container-fluid content">
             <div class="row">
                 <div class="col-12">
                     <h3 class="ST-title" id="les-figures">Les figures</h3>
@@ -76,36 +82,46 @@
                 </div>
                 {%if figures is defined%}
                         {% for figure in figures %}
-                            <div class="col-lg-3 col-md-4 col-xs-12">
-                                <a href="figure/{{figure.nom}}">
+                                <div class="col-lg-3 col-md-4 col-sm-12">
                                     <div class="media-trick">
-                                        <h4 class="ST-title">{{figure.nom}}</h4>
                                         {%if figure.mainPicture.url is defined %}
-                                            <img class="img-trick" src="{{figure.mainPicture.url}}" alt="{{figure.mainPicture.alt}}">
+                                            <a href="figure/{{figure.nom}}">
+                                                <img class="img-trick" src="{{figure.mainPicture.url}}" alt="{{figure.mainPicture.alt}}">
+                                            </a>
+                                            <div class="glyph-container">
+                                                <a href="/modifier-une-figure/{{figure.id}}">
+                                                    <i class="fas fa-edit glyphicon-edit-hp"></i>
+                                                </a>
+                                                <span class="trick-title">{{figure.nom}}</span>
+                                                <a href="/supprimer-une-figure/{{figure.id}}">
+                                                   <i class="fa fa-trash glyphicon-remove-hp" aria-hidden="true"></i>
+                                                </a>
+                                            </div>
                                         {%else%}
-                                            <img class="img-trick" src="{{asset('img/default-image.jpg')}}" alt="Image par défaut">
+                                            <a href="figure/{{figure.nom}}">
+                                                <img class="img-trick" src="{{asset('img/default-image.jpg')}}" alt="Image par défaut">
+                                            </a>
+                                            <div class="glyph-container">
+                                                <a href="/modifier-une-figure/{{figure.id}}">
+                                                    <i class="fas fa-edit glyphicon-edit-hp"></i>
+                                                </a>
+                                                <span class="trick-title">{{figure.nom}}</span>
+                                                <a>
+                                                   <i data-url="/supprimer-une-figure/{{figure.id}}" class="fa fa-trash glyphicon-remove-hp delete-trick" aria-hidden="true"></i>
+                                                </a>
+                                            </div>
                                         {%endif%}
-                                        <br>
-                                        <div class="glyph-container">
-                                            <a href="/modifier-une-figure/{{figure.id}}">
-                                                <i class="material-icons glyphicon-media">create</i>
-                                            </a>
-                                            <a href="/supprimer-une-figure/{{figure.id}}">
-                                               <i class="material-icons glyphicon-remove">clear</i>
-                                            </a>
-                                        </div>
                                     </div>
-                                </a>
-                            </div>
+                                </div>
                         {%endfor%}
                 {%endif%}
-                
             </div>
         </div>
-        <div class="bt-add-trick">
-            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-            <a href="/ajouter-une-figure"><i class="material-icons">add</i></a>
-            <span>Ajouter une figure</span>
-        </div>            
+        <a href="/ajouter-une-figure">
+            <div class="bt-add-trick">
+                <div><i class="fas fa-plus"></i></div>
+            </div>   
+        </a>    
+           
     {% endblock %}
 {% endblock %}

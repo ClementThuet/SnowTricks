@@ -18,7 +18,18 @@ class MessageRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Message::class);
     }
-
+    
+    public function find10Results($idFigure,$firstMessage,$nbMessageToAdd){
+        return $this->createQueryBuilder('comment')
+        ->innerJoin('comment.figure', 'f')
+        ->where('f.id = :idFigure')
+        ->setFirstResult($firstMessage)
+        ->setMaxResults($nbMessageToAdd)
+        ->setParameter('idFigure', $idFigure)
+        ->getQuery()
+        ->getResult()
+        ;
+    }
     // /**
     //  * @return Message[] Returns an array of Message objects
     //  */

@@ -1,26 +1,12 @@
+@viewport {
+  min-width: 300px;
+}
 .img-banner-container{
     height:100vh;
     background-position: center;
     background-size: cover;
 }
-.ST-main-title{
-    font-family: 'Lato', sans-serif;
-    color:#ededed;
-    font-size:4.5rem;
-    font-weight: bold;
-    margin-top:1vh;
-    text-align: center;
-    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-}
-.ST-subtitle{
-    font-family: 'Lato', sans-serif;
-    font-size:2.5rem;
-    font-weight: bold;
-    margin-top:25vh;
-    text-align: center;
-    color:#ededed;
-    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-}
+
 .nav-link-homepage-ST{
     font-size: 2rem;
     color:#ededed;
@@ -39,7 +25,37 @@
     margin-bottom:2vh;
     list-style: none;
 }
-
+.navbar-AP{
+    background-color:#254175;
+}
+.menu-md-plus-AP{
+    padding-right:0px !important;
+    padding-left:0px !important;
+}
+.navbar-container-menu-md-plus-AP{
+    display:flex;
+    width:100%;
+    justify-content: space-around; 
+    align-items:center;
+    padding: .5rem 1rem;
+    flex-wrap: wrap;
+    list-style: none;
+}
+.navbar-brand-AP{
+    font-family: 'Lato', sans-serif;
+    color:#ededed;
+    font-size:3rem !important;
+    font-weight: bold;
+    margin-right: 20vw !important;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+.nav-link-AP{
+    font-size: 2rem;
+    color:#ededed;
+    font-family: 'Lato', sans-serif;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+   
+}
 a:hover {
     color: black !important;
     text-decoration: none !important;
@@ -55,26 +71,65 @@ a:hover {
     color:black;
 }
 
-
 .ST-title{
     text-align: center;
-    font-family: RobotoCondensedBold, sans-serif;
+    font-family: 'Lato', sans-serif;
+    font-size: 2.8rem;
     color:black;
-    margin-top:1vh;
+    margin-top:2vh;
+    margin-bottom: 2vh;
+}
+.trick-title{
+    text-align: center;
+    font-family: 'Lato', sans-serif;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color:#254175;
 }
 .img-user{
     width:80px;
-        height:80px;
+    height:80px;
     border-radius: 50%;
 }
+.arrow-scroll-down{
+    position: absolute;
+    top:89vh; 
+    right: 20px;
+    text-align: right;
+    color:black;
+    font-size: 2.6rem;
+}
+.content{
+    margin-bottom: 6vh;
+}
 .bt-add-trick{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width:50px;
+    height:50px;
+    background-color:#7d92b9;
+    color:black;
+    border-radius: 50%;
     position: fixed;
     bottom: 5vh;
-    right: 5vw; 
+    margin-bottom: 1vh;
+    right: 6vw; 
+    border: 1px solid black;
 }
 .glyphicon-plus-sign{
     color : blue;
     font-size:5rem;
+}
+.edit-del-trick-container{
+    display:flex;
+    justify-content: flex-end;
+}
+.edit-del-trick-icons{
+    border:1px solid black;
+    text-align: center;
+    padding:3px;
 }
 .trick-presentation{
     display:flex;
@@ -84,7 +139,7 @@ a:hover {
 }
 .trick-name{
     text-align: center;
-    font-family: RobotoCondensedBold, sans-serif;
+    font-family: 'Lato', sans-serif;
     font-size:4rem;
     color:black;
     margin-top:1vh;
@@ -94,6 +149,8 @@ a:hover {
     max-width: 80vw;
 }
 .media-trick{
+    width:100%;
+    height:90%;
     margin-top:2vh;
     margin-bottom:2vh;
     border: 2px solid black;
@@ -107,10 +164,10 @@ a:hover {
     height:23vh;
 }
 .trick-description{
-    margin-top:2vh;
-    text-align: center;
+    margin:2%;
+    text-align: left;
     font-family: RobotoCondensedBold, sans-serif;
-    font-size:2rem;
+    font-size:1.7rem;
 }
 .trick-author{
     margin-top:1vh;
@@ -122,32 +179,99 @@ a:hover {
     display:flex;
     justify-content: center;
 }
+
 .form-contenu-input{
-    width:60%;
+    width:95%;
 }
-/*.list-medias-trick{
+.textarea-comment{
+    margin-top:1vh;
+    height:13vh !important;
+}
+.commentaires{
+    display:block;
+}
+.commentaire{
     display:flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-    align-items: center;
-    margin-top:3vh;
-}*/
+    flex-wrap:wrap;
+    justify-content: space-around;
+    margin-bottom:2vh;
+}
+.trick-comment{
+    width:80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color:#c7e3ec;
+    border:1px solid black;
+    border-radius: 5px;
+    padding-left:7px;
+    padding-top:10px;
+    margin-left: 2vw;
+}
+.trick-comment-date-author{
+    padding-right:10px;
+    padding-bottom:5px;
+    align-self: flex-end;
+    
+}
+.photo-user-comment{
+    width:10%;
+    height:15vh; 
+    border-radius: 10px;
+    border:1px solid black;
+}
+.photo-user-profil-container{
+    display:flex;
+    justify-content: center;
+}
+.photo-user-profil{
+    width:20vh;
+    border-radius: 10px;
+}
+.comment-voir-plus{
+    text-align: center;
+    margin-bottom:1vh;
+}
+.btn{
+    background-color: #254175 !important;
+    color:white !important;
+}
+.btn-comment-voir-plus{
+    background-color: #254175 !important;
+    color:white !important;
+}
 
 .glyph-container{
-     display:flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
+    display:flex;
+    justify-content: space-around;
     align-items: center;
+    flex-wrap: wrap;
+    
 }
-.glyphicon-media{
-    margin-top:3px;
+.glyphicon-edit-hp{
     color:black;
-    font-size:1vw;
+    font-size:1.5rem !important;
 }
-.glyphicon-remove{
-    color:red;
-    font-size:1vw;
+.glyphicon-remove-hp{
+    color:black;
+    font-size:1.5rem !important;
     margin-top:3px;
+    cursor: pointer; 
+}
+
+.glyphicon-edit-trick{
+    color:#254175;
+    font-size:2.5rem !important;
+    padding-right:10px;
+    padding-bottom:3px;
+}
+.glyphicon-remove-trick{
+    color:#c60101;
+    font-size:2.5rem !important;
+    margin-top:3px;
+    padding-left:10px;
+    padding-bottom:3px;
+    cursor: pointer; 
 }
 .update-medias-btns{
     display:flex;
@@ -155,7 +279,6 @@ a:hover {
     align-items: center;
 }
 .medias-btns{
-    margin-top:3vh;
     margin-right:1vw;
 }
 .img-update-media{
@@ -165,10 +288,28 @@ a:hover {
     min-width:50vw;
     min-height:30vh;
 }
+.form-label{
+    font-weight: bold;
+}
+.connexion-links-container{
+    display:flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
 
-/* Spécifique à l'affichage mobile */
+.connexion-links{
+    color:#254175;
+    font-size: 1.4rem;
+}
+.yesNo-btns{
+    
+}
+/* SPECIFIQUE A L'AFFICHAGE MOBILE' */
 @media screen and (max-width: 576px) {
     .menu-md-plus{
+        display: none;
+    }
+    .menu-md-plus-AP{
         display: none;
     }
     .navbar-container-menu-md-less{
@@ -177,9 +318,19 @@ a:hover {
         align-items:center;
         padding: .5rem 1rem;
         flex-wrap: wrap;
-        margin-bottom:2vh;
+        margin-bottom:4vh;
         list-style: none;
-        border: 1px solid black;
+        border-top: 1px solid black;
+    }
+    .navbar-container-menu-md-less-AP{
+        display:flex;
+        justify-content:space-around;
+        align-items:center;
+        padding: .5rem 1rem;
+        flex-wrap: wrap;
+        margin-bottom:9vh;
+        list-style: none;
+        border-top: 1px solid black;
     }
     .img-banner-container{
         height:33vh;
@@ -188,27 +339,93 @@ a:hover {
     }
     .ST-main-title{
         font-family: 'Lato', sans-serif;
-        color:white;
+        color:#ededed;
+        font-size:4.5rem;
+        font-weight: bold;
         margin-top:1vh;
         text-align: center;
         text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
     }
     .ST-subtitle{
         font-family: 'Lato', sans-serif;
+        font-size:1.7rem;
+        font-weight: bold;
         margin-top:5vh;
         text-align: center;
-        color:white;
+        color:#ededed;
         text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
     }
-    .icons-menu-mobile{
+    .ST-subtitle-AP{
+        font-family: 'Lato', sans-serif;
+        font-size:1.2rem;
+        text-align: center;
+    }
+    .navbar-mobile {
+        background-color: #254175;
+    }
+    .content{
+        margin-bottom:11vh;
+    }
+    .bt-add-trick{
+        display:flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        width:50px;
+        height:50px;
+        background-color:#7d92b9;
         color:black;
+        border-radius: 50%;
+        position: fixed;
+        bottom: 10vh;
+        right: 5vw; 
+        border: 1px solid black;
+    }
+    .icons-menu-mobile{
+        color: white;
         font-size:6vw;
     }
+    .edit-del-trick-icons{
+        margin-top:2vh;
+        margin-top:5px;
+    }
+    .trick-description{
+        margin-top:3vh;
+    } 
+    .btn-comment-voir-plus{
+        margin-bottom:5vh;
+    }
+    .update-medias-btns{
+       margin-bottom:7vh !important;
+       flex-wrap:wrap;
+    }
+    .medias-btns{
+        margin:2px;
+    }
 }
+
 /* Spécifique à l'affichage md + */
 @media screen and (min-width: 576px) {
     .menu-md-less{
         display: none;
+    }
+    .ST-main-title{
+        font-family: 'Lato', sans-serif;
+        color:#ededed;
+        font-size:4.5rem;
+        font-weight: bold;
+        margin-top:1vh;
+        text-align: center;
+        text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    }
+    .ST-subtitle{
+        font-family: 'Lato', sans-serif;
+        font-size:2.5rem;
+        font-weight: bold;
+        margin-top:25vh;
+        text-align: center;
+        color:#ededed;
+        text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
     }
     
     
