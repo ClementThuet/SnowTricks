@@ -3,25 +3,17 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use App\Entity\Utilisateur;
 use App\Entity\Figure;
 use App\Entity\Media;
 use App\Entity\Message;
 use App\Form\Type\MessageType;
-use App\Form\Type\UtilisateurType;
 use App\Repository\MessageRepository;
-use App\Form\Type\EditUtilisateurType;
 use App\Form\Type\UpdateFigureType;
-use App\Form\Type\FigureType;
 use App\Form\Type\MediaType;
-use App\Form\Type\LoginType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\HttpFoundation\File\File;
-use Symfony\Component\PropertyAccess\PropertyAccess;
+
 
 class STController extends AbstractController{
     
@@ -39,9 +31,10 @@ class STController extends AbstractController{
         $medias=$figure->getMedias();
         $messages=$figure->getMessages();
         $nbTotalMessages= count($messages);
+        
         //Récupération des X premiers messages (ici 5)
         $FirstsMessages = $repository->find10Results($figure->getId(),0,5);
-        
+
         //Ajout d'un message à la figure
         $message = new Message;
         $form = $this->createForm(MessageType::class, $message);
@@ -62,6 +55,7 @@ class STController extends AbstractController{
     
     public function afficherPlusCommentaires(Request $request,MessageRepository $repository)
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $idFigure=$request->request->get('idFigure');
         $firstMessage=$request->request->get('firstMessage');
         $nbMessageToAdd=$request->request->get('nbMessageToAdd');
@@ -83,31 +77,12 @@ class STController extends AbstractController{
                             <p class="trick-comment-content">'.$contenuMessage.'</p>
                             <span class="trick-comment-date-author"> Le '.$dateMessage.' à '.$heureMessage.' par '.$prenomAuteurMessage.' '.$nomAuteurMessage.'</span>
                         </div>
-                   
                     </div>';
         }
-        
         
         $response = new Response($messages);
         return $response;
     }    
-    
-    //Affiche la page de login 
-     public function login(AuthenticationUtils $authenticationUtils)
-    {
-        // get the login error if there is one
-        $error = $authenticationUtils->getLastAuthenticationError();
-        // last username entered by the user
-        $lastUsername = $authenticationUtils->getLastUsername();
-
-        return $this->render('login.html.twig', [
-            'last_username' => $lastUsername,
-            'error'         => $error,
-        ]);
-    }
-    
-    public function deconnexion(){
-    }
     
     public function dashboard(){
         return $this->render('dashboard.html.twig');
@@ -116,7 +91,7 @@ class STController extends AbstractController{
     public function ajoutFigure(Request $request){
         
         //Vérification que l'utilisateur est connecté
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        
         $user = $this->getUser();
         $figure = new Figure();
         $form = $this->createForm(UpdateFigureType::class, $figure);
@@ -275,46 +250,7 @@ class STController extends AbstractController{
         return $this->redirect('/figure/'.$figure->getNom().'');
     }
     
-    public function afficherProfilMembre($idUtilisateur, Request $request){
-        
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-        $entityManager = $this->getDoctrine()->getManager();
-        $utilisateur = $entityManager->getRepository(Utilisateur::class)->find($idUtilisateur);
-        $form = $this->createForm(EditUtilisateurType::class, $utilisateur);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $imageUploaded = $form['urlPhoto']->getData();
-
-            if ($imageUploaded) {
-                $originalFilename = pathinfo($imageUploaded->getClientOriginalName(), PATHINFO_FILENAME);
-                // this is needed to safely include the file name as part of the URL
-                $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
-                $newFilename = $safeFilename.'-'.uniqid().'.'.$imageUploaded->guessExtension();
-               
-                // Move the file to the directory where brochures are stored
-                try {
-                    $imageUploaded->move(
-                        $this->getParameter('users_pictures'),
-                        $newFilename
-                    );
-                } catch (FileException $e) {
-                    $this->addFlash('successEditUtilisateur', 'Erreur lors de l\'upload de la photo, veuillez réesayer.'.$e);
-                    return $this->redirect('/profil-membre/'.$idUtilisateur.'');
-                }
-                // updates the property to store the file name
-                $utilisateur->setUrlPhoto('/img/users_pictures/'.$newFilename);
-            } 
-            $entityManager->persist($utilisateur);
-            $entityManager->persist($utilisateur);
-            $entityManager->flush();
-            $this->addFlash('successEditUtilisateur', 'Profil utilisateur mise à jour avec succès.');
-            return $this->redirect('/profil-membre/'.$idUtilisateur.'');
-        }
-        return $this->render('profilMembre.html.twig', [
-            'form' => $form->createView(),
-            'utilisateur' => $utilisateur
-        ]);
-    }
+    
     
     
     

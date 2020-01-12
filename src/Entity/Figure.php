@@ -92,7 +92,7 @@ class Figure
     public function getMainPicture()
     {
         $medias=$this->getMedias();
-        foreach($medias as $key => $media){
+        foreach($medias as $media){
             if ($media->getIsMainPicture() == true){
                return $media;
             }
@@ -189,9 +189,9 @@ class Figure
         return $this->dateDerniereModification;
     }
 
-    public function setDateDerniereModification($dateDerniereModification)
+    public function setDateDerniereModification($dateDerniereModif)
     {
-        $this->dateDerniereModification = $dateDerniereModification;
+        $this->dateDerniereModification = $dateDerniereModif;
 
         return $this;
     }
@@ -200,8 +200,8 @@ class Figure
         return $this->dernierUtilisateurModification;
     }
 
-    function setDernierUtilisateurModification($dernierUtilisateurModification) {
-        $this->dernierUtilisateurModification = $dernierUtilisateurModification;
+    function setDernierUtilisateurModification($lastUserUpdate) {
+        $this->dernierUtilisateurModification = $lastUserUpdate;
     }
     
     function getMessages() {

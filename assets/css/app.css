@@ -1,19 +1,15 @@
-@viewport {
-  min-width: 300px;
-}
 .img-banner-container{
-    height:100vh;
     background-position: center;
     background-size: cover;
+    height:100vh;
 }
 
 .nav-link-homepage-ST{
-    font-size: 2rem;
     color:#ededed;
     font-family: 'Lato', sans-serif;
+    font-size: 2rem;
     margin-right:2vw;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-   
 }
 .navbar-container-menu-md-plus{
     display:flex;
@@ -29,8 +25,8 @@
     background-color:#254175;
 }
 .menu-md-plus-AP{
-    padding-right:0px !important;
-    padding-left:0px !important;
+    padding-left:0 !important;
+    padding-right:0 !important;
 }
 .navbar-container-menu-md-plus-AP{
     display:flex;
@@ -50,11 +46,10 @@
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 .nav-link-AP{
-    font-size: 2rem;
     color:#ededed;
     font-family: 'Lato', sans-serif;
+    font-size: 2rem;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-   
 }
 a:hover {
     color: black !important;
@@ -66,9 +61,9 @@ a:hover {
     color:white;
 }
 .navbar-brand-ST{
-    font-size: 2.8em !important;
-    font-family: RobotoCondensedBold, sans-serif;
     color:black;
+    font-family: RobotoCondensedBold, sans-serif;
+    font-size: 2.8em !important;
 }
 
 .ST-title{
@@ -137,11 +132,11 @@ a:hover {
     align-items: center;
 }
 .trick-name{
-    text-align: center;
+    color:black;
     font-family: 'Lato', sans-serif;
     font-size:4rem;
-    color:black;
     margin-top:1vh;
+    text-align: center;
 }
 .trick-main-picture{
     max-height:70vh;
@@ -158,8 +153,8 @@ a:hover {
     width:100%;
 }
 .video-trick{
-    width:100%;
     height:23vh;
+    width:100%;
 }
 .trick-description{
     margin:2%;
@@ -201,10 +196,8 @@ a:hover {
     margin-bottom:5px;
 }
 .photo-user-comment{
-    width:100%;
-   /* border-radius: 10px;*/
     border:1px solid black;
-    
+    width:100%;
 }
 .trick-comment{
     width:80%;
@@ -222,7 +215,6 @@ a:hover {
     padding-right:10px;
     padding-bottom:5px;
     align-self: flex-end;
-    
 }
 
 .photo-user-profil-container{
@@ -230,12 +222,12 @@ a:hover {
     justify-content: center;
 }
 .photo-user-profil{
-    width:20vh;
     border-radius: 10px;
+    width:20vh;
 }
 .comment-voir-plus{
-    text-align: center;
     margin-bottom:1vh;
+    text-align: center;
 }
 .btn{
     background-color: #254175 !important;
@@ -278,9 +270,9 @@ a:hover {
     cursor: pointer; 
 }
 .update-medias-btns{
+    align-items: center;
     display:flex;
     justify-content: center;
-    align-items: center;
 }
 .medias-btns{
     margin-right:1vw;
@@ -351,12 +343,12 @@ a:hover {
         text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
     }
     .ST-subtitle{
+        color:#ededed;
         font-family: 'Lato', sans-serif;
         font-size:1.7rem;
         font-weight: bold;
         margin-top:5vh;
         text-align: center;
-        color:#ededed;
         text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
     }
     .ST-subtitle-AP{
