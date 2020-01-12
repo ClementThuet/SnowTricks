@@ -12,7 +12,7 @@ show_more_comments:
        
 app_login:
     path: /connexion
-    controller: App\Controller\STController::login 
+    controller: App\Controller\UserController::login 
     
 forgotten_password:
     path: /mot-de-passe-oublie
@@ -30,7 +30,7 @@ signup:
     
 app_logout:
     path: /deconnexion
-    controller: App\Controller\STController::deconnexion
+    controller: App\Controller\UserController::deconnexion
     
 add_trick:
     path: /ajouter-une-figure
@@ -71,7 +71,7 @@ delete_media:
         
 profil_membre:
     path: /profil-membre/{idUtilisateur}
-    controller: App\Controller\STController::AfficherProfilMembre
+    controller: App\Controller\UserController::AfficherProfilMembre
     requirements:
         idUtilisateur: '\d+'
 
