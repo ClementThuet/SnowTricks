@@ -5,6 +5,10 @@ index:
 figure:
        path: /figure/{nomFigure}
        controller: App\Controller\STController::afficherFigure  
+
+show_more_comments:
+       path: /afficher-plus-de-commentaires
+       controller: App\Controller\STController::afficherPlusCommentaires  
        
 app_login:
     path: /connexion
@@ -75,4 +79,4 @@ activer_compte:
     path: /activer-mon-compte/{token}
     controller: App\Controller\UserController::ActiverCompte
     requirements:
-        token: '\w'
+        token: '\w+'

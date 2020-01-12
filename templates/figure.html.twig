@@ -1,68 +1,101 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accueil - SnowTricks{% endblock %}
+{% block title %}{{figure.nom}} - SnowTricks{% endblock %}
 {% block body %}
     {% block content %}
         <div class="container-fluid">
             <div class="row" >
-                <div class="col-12">
-                    <nav class="navbar navbar-expand-md navbar-ST" >
-                        <a class="navbar-brand navbar-brand-ST" href="/">SnowTricks</a>
-                        <div class="collapse navbar-collapse navigation-menu"  id='navbarToCollapse' >
-                            <ul class="navbar-nav ">
-                                <li class="nav-item active ">
-                          <a class=" nav-link-homepage-ST " href="/#les-figures">Les figures <span class="sr-only">(current)</span></a>
-                        </li>
-                        {%if app.user %}
-                            <li class="nav-item">
-                              <a class=" nav-link-ST"  href="/deconnexion">Déconnexion</a>
+                <div class="col-lg-12 menu-md-plus-AP">
+                    <nav class="navbar-AP" >
+                        <ul class="navbar-container-menu-md-plus-AP">
+                            <a class="navbar-brand navbar-brand-AP" href="/">SnowTricks</a>
+                            <li>
+                              <a class="nav-link-AP" href="/">Accueil</a>
                             </li>
-                        {% else %}
-                            <li class="nav-item">
-                                <a class=" nav-link-ST" href="/inscription">S'inscrire</a>
-                            </li>
-                            <li class="nav-item">
-                              <a class=" nav-link-ST"  href="/connexion">Connexion</a>
-                            </li>
-                        {%endif%}
-                            </ul>
-                        </div>
+                            {%if app.user %}
+                                <a class="nav-link-AP" href="/profil-membre/{{app.user.id}}">{{app.user.prenom}} {{app.user.nom}}</a>
+                                <li>
+                                  <a class="nav-link-AP"  href="/deconnexion">Déconnexion</a>
+                                </li>
+                            {% else %}
+                                <li>
+                                    <a class="nav-link-AP" href="/inscription">S'inscrire</a>
+                                </li>
+                                <li>
+                                  <a class="nav-link-AP"  href="/connexion">Connexion</a>
+                                </li>
+                            {%endif%}
+                        </ul>
                     </nav>
-                   
+                </div>
+                {# Menu mobile #}
+                <div class="col-12 menu-md-less">
+                    <nav class=" fixed-bottom navbar-mobile navbar-light" >
+                            <ul class="navbar-container-menu-md-less" >
+                                {%if app.user %}
+                                    <li class="element-menu-md-less " id="photo-utilisateur">
+                                        <a href="/profil-membre/{{app.user.id}}"><i class="fas fa-user-circle icons-menu-mobile"></i></a>
+                                    </li>
+                                    <li class="element-menu-md-less active ">
+                                        <a class=" " href="/"><span class="fas fa-home icons-menu-mobile"></span> </a>
+                                      </li>
+                                    <li class="element-menu-md-less">
+                                      <a class=" "  href="/deconnexion"><i class="fas fa-sign-out-alt icons-menu-mobile"></i></a>
+                                    </li>
+                                {% else %}
+                                    <li class="element-menu-md-less">
+                                        <a class=" nav-link-homepage-ST" href="/inscription"><i class="fas fa-user-plus icons-menu-mobile"></i></a>
+                                    </li>
+                                    <li class="element-menu-md-less active ">
+                                        <a class=" " href="/"><span class="fas fa-home icons-menu-mobile"></span> </a>
+                                      </li>
+                                    <li class="element-menu-md-less">
+                                      <a class=" "  href="/connexion"><i class="fas fa-sign-in-alt icons-menu-mobile"></i></a>
+                                    </li>
+                                {%endif%}
+                          </ul>
+                    </nav>
                 </div>
             </div>
         </div>
         <div class="container-fluid">
             <div class="row">
-                <div class="col-12">
+                <div class="col-12 ">
+                    <div class="edit-del-trick-container">
+                        <div class="edit-del-trick-icons">  
+                            <h6 class="ST-subtitle-AP">Modifier cette figure ? </h6>
+                            <a href="/modifier-une-figure/{{figure.id}}">
+                                <i class="fas fa-edit glyphicon-edit-trick"></i>
+                            </a>
+                            <a>
+                               <i data-url="/supprimer-une-figure/{{figure.id}}" class="fa fa-trash glyphicon-remove-trick delete-trick"></i>
+                            </a>
+                        </div>
+                    </div>
                     {% for message in app.flashes('successEditTrick') %}
+                        <div class="alert alert-success">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                    {% for message in app.flashes('successDeleteMediaTrick') %}
                         <div class="alert alert-success">
                             {{ message }}
                         </div>
                     {% endfor %}
                     <h1 class="trick-name">{{figure.nom}}</h1>
                     <div class="trick-presentation">
-                        {% if figure.mainPicture.url is defined %}
+                        {% if figure.mainPicture.url is defined and figure.mainPicture.isMainPicture is not null%}
                             <img class="trick-main-picture" src="{{figure.mainPicture.url}}" alt="{{figure.mainPicture.alt}}">
                         {% else %}
                             <img class="trick-main-picture" src="{{asset('img/default-image.jpg')}}" alt="Image par défaut">
                         {%endif%}
                     </div>
-                    <div class="glyph-container">
-                        <a href="/modifier-une-figure/{{figure.id}}">
-                            <i class="material-icons glyphicon-media">create</i>
-                        </a>
-                        <a href="/supprimer-une-figure/{{figure.id}}">
-                           <i class="material-icons glyphicon-remove">clear</i>
-                        </a>
-                    </div>
                 </div>
             </div>
             <div class="row">
                 {% for media in medias %}
-                    <div class="col-3">
+                    <div class="col-lg-3 col-md-4 col-sm-12">
                         <div class="media-trick">
-                            <h5 class="ST-title">{{media.titre}}</h5>
                             {%if media.isImage == true%}
                                 <img class="img-trick" src="{{media.url}}" alt="{{media.alt}}">
                             {%else%}
@@ -70,7 +103,16 @@
                                     src="{{media.url}}">
                                 </iframe>
                             {%endif%}
-                            <br>
+                            <div class="glyph-container">
+                                <a href="/modifier-une-figure/{{figure.id}}">
+                                    <i class="fas fa-edit glyphicon-edit-hp"></i>
+                                </a>
+                                <span class="trick-title">{{media.titre}}</span>
+                                <a>
+                                   <i data-url="/supprimer-un-media/{{media.id}}/{{figure.id}}" class="fa fa-trash glyphicon-remove-hp delete-media" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                            
                             <div class="glyph-container">
                                 <a href="/modifier-un-media/{{media.id}}/{{figure.id}}">
                                     <span class="glyphicon glyphicon-pencil glyphicon-media" aria-hidden="true"></span>
@@ -85,8 +127,8 @@
             </div>
             <div class="row">
                 <div class="col-12">
-                    <p class="trick-description">Description : {{figure.description}}</p>
-                    <p class="trick-description">Cette figure appartient à la famille des <b>{{figure.groupe}}</b></p>
+                    <p class="trick-description"><b>Description</b> :<br> {{figure.description}}</p>
+                    <p class="trick-description"><b>Catégorie :</b> {{figure.groupe}}</p>
                 </div>
                 <div class="col-12">
                     <p class="trick-author">Trick ajouté par : <b>{{figure.utilisateur.prenom}} {{figure.utilisateur.nom}}</b> le <b>{{figure.dateCreation|date('d-m-Y')}}</b></p>
@@ -103,11 +145,11 @@
                             {{ form_start(form, {'attr': {'class': 'form-contenu-input'}}) }}
                             {{ form_errors(form) }}
                             <div class="form-group">
-                                {{ form_row(form.contenu,{'attr':{'class':'form-control','placeholder':'Saisissez votre commentaire'}}) }}
+                                {{ form_row(form.contenu,{'attr':{'class':'form-control textarea-comment','placeholder':'Saisissez votre commentaire'}}) }}
                             </div>
                             <div class="form-group update-medias-btns">
-                                <button type="button" class="add_media_link btn btn-primary medias-btns" onclick="window.history.back()">Retour</button>
-                                {{ form_row(form.save,{'attr':{'class':'btn btn-primary medias-btns'}}) }}
+                                <button type="button" class="add_media_link btn medias-btns" onclick="window.history.back()">Retour</button>
+                                {{ form_row(form.save,{'attr':{'class':'btn medias-btns'}}) }}
                             </div>
                             {{ form_end(form) }}
                         </div>
@@ -116,16 +158,27 @@
             {%endif%}
             <div class="row">
                 <div class="col-12">
-                    {%for message in messages%}
-                        <div>
-                            <img src="{comment.utilisateur.media.url}" alt="{utilisateur.media.url}">
-                            <div class="trick-comment">
-                                <p>{{message.contenu}}</p>
-                                <span> Le {{message.date|date('d-m-Y')}} par {{message.utilisateur.prenom}} {{message.utilisateur.nom}}</span>
+                    <div class="commentaires">
+                        <h3 class="ST-title">Commentaires</h3>
+                        {%for message in messages%}
+                            <div class="commentaire">
+                                <div class="commentaire-photo-container">
+                                    <img class="photo-user-comment" src="{{message.utilisateur.urlPhoto}}" alt="Image représentant {{message.utilisateur.prenom}} {{message.utilisateur.nom}}">
+                                </div>
+                                <div class="trick-comment">
+                                    <p class="trick-comment-content">{{message.contenu}}</p>
+                                    <span class="trick-comment-date-author">Le {{message.date|date('d-m-Y')}} à {{message.date|date('H:i')}} par {{message.utilisateur.prenom}} {{message.utilisateur.nom}}</span>
+                                </div>
                             </div>
+                        {%endfor%}
+                        <div class="comment-voir-plus">
+                            <button class="btn btn-comment-voir-plus">Voir plus</button>
                         </div>
-                        <hr>
-                    {%endfor%}
+                        
+                        <input type="hidden" id="idFigure" value="{{figure.id}}">
+                        <input type="hidden" id="row" value="0">
+                        <input type="hidden" id="all" value="{{nbTotalMessages}}">
+                    </div>
                 </div>
             </div>
         </div>

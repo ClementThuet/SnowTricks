@@ -30,7 +30,7 @@ class Media
     private $isImage;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $isMainPicture;
     

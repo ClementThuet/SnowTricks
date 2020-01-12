@@ -18,7 +18,8 @@ class FigureRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Figure::class);
     }
-
+    
+    
     // /**
     //  * @return Figure[] Returns an array of Figure objects
     //  */
@@ -35,7 +36,7 @@ class FigureRepository extends ServiceEntityRepository
         ;
     }
     */
-
+    
     /*
     public function findOneBySomeField($value): ?Figure
     {
