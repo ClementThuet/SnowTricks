@@ -5,11 +5,13 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Entity\Utilisateur;
 use App\Form\Type\UtilisateurType;
+use App\Form\Type\EditUtilisateurType;
 use App\Form\Type\ResetPasswordType;
 use App\Form\Type\NewPasswordType;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mime\Email;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class UserController extends AbstractController
 {
@@ -26,13 +28,13 @@ class UserController extends AbstractController
             //Génération d'une chaine de caractère aléatoire en hexadecimal pour le token de validation
             $randomString = random_bytes(20);
             $registrationToken=bin2hex($randomString);
-            $accountActivationLink="snowtricks/activer-mon-compte/".$registrationToken."";
+            $accActivationLink="snowtricks/activer-mon-compte/".$registrationToken."";
             $utilisateur->setRegistrationToken($registrationToken);
             $utilisateur->setIsAccountActive(false);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($utilisateur);
             $entityManager->flush();
-            $this->envoiMailInscription($mailer,$utilisateur,$accountActivationLink);
+            $this->envoiMailInscription($mailer,$utilisateur,$accActivationLink);
             return $this->redirectToRoute('app_login');
         }
         return $this->render('signup.html.twig', [
@@ -40,7 +42,7 @@ class UserController extends AbstractController
         ]);
     }
     
-    public function envoiMailInscription(MailerInterface $mailer,$utilisateur,$accountActivationLink)
+    public function envoiMailInscription(MailerInterface $mailer,$utilisateur,$accActivationLink)
     {   
         
         $email = (new Email())
@@ -51,7 +53,7 @@ class UserController extends AbstractController
                     . '<br>'
                     . 'Cliquez sur le lien ci-dessous pour activer votre compte.'
                     . '<br>'
-                    . '<a href='.$accountActivationLink.'>Activer mon compte</a> '
+                    . '<a href='.$accActivationLink.'>Activer mon compte</a> '
                     . '<br>A bientôt,</p>'
                     .'<p style="margin-left:25%;">L\'équipe SnowTricks</p>');
         $mailer->send($email);
@@ -94,7 +96,7 @@ class UserController extends AbstractController
                 $utilisateur->setResetToken($resetPasswordToken);
                 $entityManager->persist($utilisateur);
                 $entityManager->flush();
-                $accountResetPasswordLink="snowtricks/reinitialiser-mon-mot-de-passe/".$resetPasswordToken."";
+                $accResetPWLink="snowtricks/reinitialiser-mon-mot-de-passe/".$resetPasswordToken."";
                 $email = (new Email())
                 ->from('clementthuet7@gmail.com')
                 ->to($adresseEmail)
@@ -103,7 +105,7 @@ class UserController extends AbstractController
                         . '<br>'
                         . 'Cliquez sur le lien ci-dessous pour définir un nouveau mot de passe.'
                         . '<br>'
-                        . '<a href='.$accountResetPasswordLink.'>Réinitialiser votre mot de passe</a> '
+                        . '<a href='.$accResetPWLink.'>Réinitialiser votre mot de passe</a> '
                         . '<br>A bientôt,</p>'
                         .'<p style="margin-left:25%;">L\'équipe SnowTricks</p>');
                 $mailer->send($email);
@@ -144,7 +146,6 @@ class UserController extends AbstractController
                     $this->addFlash('errorNotSamePasswords', 'Les mots de passes saisies ne correspondent pas, veuillez réesayer.');
                     return $this->render('definirNouveauMotDePasse.html.twig',['form'=>$form->createView()]);
                 }
-                
             }
             return $this->render('definirNouveauMotDePasse.html.twig',['form'=>$form->createView()]);
         }
@@ -152,5 +153,62 @@ class UserController extends AbstractController
         return $this->redirectToRoute('app_login');
     }
     
+    //Affiche la page de login 
+    public function login(AuthenticationUtils $authenticationUtils)
+    {
+        // get the login error if there is one
+        $error = $authenticationUtils->getLastAuthenticationError();
+        // last username entered by the user
+        $lastUsername = $authenticationUtils->getLastUsername();
+        return $this->render('login.html.twig', [
+            'last_username' => $lastUsername,
+            'error'         => $error,
+        ]);
+    }
+    
+    public function deconnexion()
+    {
+    }
+    
+    public function afficherProfilMembre($idUtilisateur, Request $request){
+        
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $entityManager = $this->getDoctrine()->getManager();
+        $utilisateur = $entityManager->getRepository(Utilisateur::class)->find($idUtilisateur);
+        $form = $this->createForm(EditUtilisateurType::class, $utilisateur);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $imageUploaded = $form['urlPhoto']->getData();
+
+            if ($imageUploaded) {
+                $originalFilename = pathinfo($imageUploaded->getClientOriginalName(), PATHINFO_FILENAME);
+                // this is needed to safely include the file name as part of the URL
+                $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$imageUploaded->guessExtension();
+               
+                // Move the file to the directory where brochures are stored
+                try {
+                    $imageUploaded->move(
+                        $this->getParameter('users_pictures'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    $this->addFlash('successEditUtilisateur', 'Erreur lors de l\'upload de la photo, veuillez réesayer.'.$e);
+                    return $this->redirect('/profil-membre/'.$idUtilisateur.'');
+                }
+                // updates the property to store the file name
+                $utilisateur->setUrlPhoto('/img/users_pictures/'.$newFilename);
+            } 
+            $entityManager->persist($utilisateur);
+            $entityManager->persist($utilisateur);
+            $entityManager->flush();
+            $this->addFlash('successEditUtilisateur', 'Profil utilisateur mise à jour avec succès.');
+            return $this->redirect('/profil-membre/'.$idUtilisateur.'');
+        }
+        return $this->render('profilMembre.html.twig', [
+            'form' => $form->createView(),
+            'utilisateur' => $utilisateur
+        ]);
+    }
 }
 
