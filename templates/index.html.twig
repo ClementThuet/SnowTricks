@@ -26,7 +26,7 @@
                             {%endif%}
                         </ul>
                     </nav>
-                    <h1 class="ST-main-title" >Snowtricks</h1>
+                    <h1 class="ST-main-title">Snowtricks</h1>
                     <h3 class="ST-subtitle">Ensemble partageons nos connaissances sur le snowboard freestyle</h3>
                     <a href="#les-figures">
                         <div class="arrow-scroll-down">
@@ -84,7 +84,7 @@
                         {% for figure in figures %}
                                 <div class="col-lg-3 col-md-4 col-sm-12">
                                     <div class="media-trick">
-                                        {%if figure.mainPicture.url is defined %}
+                                         {% if figure.mainPicture.url is defined and figure.mainPicture.isMainPicture is not null%}
                                             <a href="figure/{{figure.nom}}">
                                                 <img class="img-trick" src="{{figure.mainPicture.url}}" alt="{{figure.mainPicture.alt}}">
                                             </a>
@@ -107,7 +107,7 @@
                                                 </a>
                                                 <span class="trick-title">{{figure.nom}}</span>
                                                 <a>
-                                                   <i data-url="/supprimer-une-figure/{{figure.id}}" class="fa fa-trash glyphicon-remove-hp delete-trick" aria-hidden="true"></i>
+                                                   <i data-url="/supprimer-une-figure/{{figure.id}}" class="fa fa-trash glyphicon-remove-hp delete-media" aria-hidden="true"></i>
                                                 </a>
                                             </div>
                                         {%endif%}

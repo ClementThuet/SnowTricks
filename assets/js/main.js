@@ -6,6 +6,12 @@ $(".delete-trick").click(function() {
         window.location.replace($url);
     }
 });
+$(".delete-media").click(function() {
+    if (window.confirm("Êtes-vous certain de vouloir supprimer ce média ?")) { 
+        $url=$(".delete-media").data('url');
+        window.location.replace($url);
+    }
+});
 //Pour ajout/édit d'un média à un trick
 //Masquer "cette img est-elle l'img principale ?" si la réponse est non à "Ce média est-il une img ?"
 $isMainPicture=$('#formRowIsMainPicture');
@@ -69,8 +75,6 @@ $(document).ready(function(){
 
                     var rowno = lastDisplayed + nbCommentsBase;
                     // checking row value is greater than allcount or not
-                    console.log(rowno);
-                    console.log(allcount);
                     if(rowno >= allcount ){
 
                         // Change the text and background
