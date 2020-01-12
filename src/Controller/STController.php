@@ -63,7 +63,6 @@ class STController extends AbstractController{
     public function afficherPlusCommentaires(Request $request,MessageRepository $repository)
     {
         $idFigure=$request->request->get('idFigure');
-       // $row=$request->request->get('row');
         $firstMessage=$request->request->get('firstMessage');
         $nbMessageToAdd=$request->request->get('nbMessageToAdd');
         // selecting posts 
@@ -77,13 +76,15 @@ class STController extends AbstractController{
             $prenomAuteurMessage=$message->getUtilisateur()->getPrenom();
             $nomAuteurMessage=$message->getUtilisateur()->getNom();
             $messages.='<div class=\'commentaire\'>'
-                     .'<img class="photo-user-comment" src="'.$imgAuteurSrc.'" alt="Image représentant '.$prenomAuteurMessage.' '.$nomAuteurMessage.'">'
-                     .'<div class=\'trick-comment\'>
+                    .'<div class="commentaire-photo-container">'
+                        .'<img class="photo-user-comment" src="'.$imgAuteurSrc.'" alt="Image représentant '.$prenomAuteurMessage.' '.$nomAuteurMessage.'">'
+                    .'</div>'    
+                    .'<div class=\'trick-comment\'>
                             <p class="trick-comment-content">'.$contenuMessage.'</p>
                             <span class="trick-comment-date-author"> Le '.$dateMessage.' à '.$heureMessage.' par '.$prenomAuteurMessage.' '.$nomAuteurMessage.'</span>
                         </div>
-                        </div>'
-                     ;
+                   
+                    </div>';
         }
         
         
@@ -219,6 +220,10 @@ class STController extends AbstractController{
                 // updates the property to store the file name
                 $media->setUrl('/img/uploads/'.$newFilename);
             }
+            if($media->getisImage()==false && $form->get('urlVideo')->getData() != null)
+            {
+                $media->setUrl($form->get('urlVideo')->getData());
+            }
             $entityManager->persist($media);
             $entityManager->persist($figure);
             $entityManager->flush();
@@ -262,11 +267,12 @@ class STController extends AbstractController{
         
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $entityManager = $this->getDoctrine()->getManager();
+        $figure= $entityManager->getRepository(Figure::class)->find($idFigure);
         $media = $entityManager->getRepository(Media::class)->find($idMedia);
         $entityManager->remove($media);
         $entityManager->flush();
-        $this->addFlash('successMediaTrick', 'Média supprimé avec succès.');
-        return $this->redirect('/modifier-une-figure/'.$idFigure.'');
+        $this->addFlash('successDeleteMediaTrick', 'Média supprimé avec succès.');
+        return $this->redirect('/figure/'.$figure->getNom().'');
     }
     
     public function afficherProfilMembre($idUtilisateur, Request $request){

@@ -30,6 +30,8 @@ class MediaType extends AbstractType
                 'choices' => array('Oui' => true, 'Non' => false),
                 'multiple'=>false,
                 'expanded'=>true,
+                'required' => false,
+                'placeholder' => false,
                 'label' => 'Cette image est-t-elle l\'image principale ?',
                 //'data' => 0,
                 ])

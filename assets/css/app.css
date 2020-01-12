@@ -86,10 +86,9 @@ a:hover {
     font-weight: bold;
     color:#254175;
 }
-.img-user{
-    width:80px;
-    height:80px;
-    border-radius: 50%;
+
+.img-trick-hp{
+    width:100%;
 }
 .arrow-scroll-down{
     position: absolute;
@@ -153,11 +152,10 @@ a:hover {
     height:90%;
     margin-top:2vh;
     margin-bottom:2vh;
-    border: 2px solid black;
+    border: 2px solid #7d92b9;
 }
 .img-trick{
     width:100%;
-    max-height:23vh;
 }
 .video-trick{
     width:100%;
@@ -196,6 +194,18 @@ a:hover {
     justify-content: space-around;
     margin-bottom:2vh;
 }
+.commentaire-photo-container{
+    width:200px;
+    height:200px;
+    overflow:hidden;
+    margin-bottom:5px;
+}
+.photo-user-comment{
+    width:100%;
+   /* border-radius: 10px;*/
+    border:1px solid black;
+    
+}
 .trick-comment{
     width:80%;
     display: flex;
@@ -214,12 +224,7 @@ a:hover {
     align-self: flex-end;
     
 }
-.photo-user-comment{
-    width:10%;
-    height:15vh; 
-    border-radius: 10px;
-    border:1px solid black;
-}
+
 .photo-user-profil-container{
     display:flex;
     justify-content: center;
@@ -245,7 +250,6 @@ a:hover {
     display:flex;
     justify-content: space-around;
     align-items: center;
-    flex-wrap: wrap;
     
 }
 .glyphicon-edit-hp{

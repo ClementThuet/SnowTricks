@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accueil - SnowTricks{% endblock %}
+{% block title %}Modification de {{figure.nom}}  - SnowTricks{% endblock %}
 {% block body %}
     {% block content %}
         <div class="container-fluid">
@@ -126,7 +126,7 @@
                                 </a>
                                 
                                 <a>
-                                   <i data-url="/supprimer-un-media/{{media.id}}/{{figure.id}}" class="fa fa-trash glyphicon-remove-hp delete-trick" aria-hidden="true"></i>
+                                   <i data-url="/supprimer-un-media/{{media.id}}/{{figure.id}}" class="fa fa-trash glyphicon-remove-hp delete-media" aria-hidden="true"></i>
                                 </a>
                             </div>
                         </div>

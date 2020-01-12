@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accueil - SnowTricks{% endblock %}
+{% block title %}{{figure.nom}} - SnowTricks{% endblock %}
 {% block body %}
     {% block content %}
         <div class="container-fluid">
@@ -62,7 +62,6 @@
             <div class="row">
                 <div class="col-12 ">
                     <div class="edit-del-trick-container">
-                      
                         <div class="edit-del-trick-icons">  
                             <h6 class="ST-subtitle-AP">Modifier cette figure ? </h6>
                             <a href="/modifier-une-figure/{{figure.id}}">
@@ -78,9 +77,14 @@
                             {{ message }}
                         </div>
                     {% endfor %}
+                    {% for message in app.flashes('successDeleteMediaTrick') %}
+                        <div class="alert alert-success">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
                     <h1 class="trick-name">{{figure.nom}}</h1>
                     <div class="trick-presentation">
-                        {% if figure.mainPicture.url is defined %}
+                        {% if figure.mainPicture.url is defined and figure.mainPicture.isMainPicture is not null%}
                             <img class="trick-main-picture" src="{{figure.mainPicture.url}}" alt="{{figure.mainPicture.alt}}">
                         {% else %}
                             <img class="trick-main-picture" src="{{asset('img/default-image.jpg')}}" alt="Image par défaut">
@@ -92,7 +96,6 @@
                 {% for media in medias %}
                     <div class="col-lg-3 col-md-4 col-sm-12">
                         <div class="media-trick">
-                            <h5 class="ST-title">{{media.titre}}</h5>
                             {%if media.isImage == true%}
                                 <img class="img-trick" src="{{media.url}}" alt="{{media.alt}}">
                             {%else%}
@@ -100,7 +103,16 @@
                                     src="{{media.url}}">
                                 </iframe>
                             {%endif%}
-                            <br>
+                            <div class="glyph-container">
+                                <a href="/modifier-une-figure/{{figure.id}}">
+                                    <i class="fas fa-edit glyphicon-edit-hp"></i>
+                                </a>
+                                <span class="trick-title">{{media.titre}}</span>
+                                <a>
+                                   <i data-url="/supprimer-un-media/{{media.id}}/{{figure.id}}" class="fa fa-trash glyphicon-remove-hp delete-media" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                            
                             <div class="glyph-container">
                                 <a href="/modifier-un-media/{{media.id}}/{{figure.id}}">
                                     <span class="glyphicon glyphicon-pencil glyphicon-media" aria-hidden="true"></span>
@@ -150,7 +162,9 @@
                         <h3 class="ST-title">Commentaires</h3>
                         {%for message in messages%}
                             <div class="commentaire">
-                                <img class="photo-user-comment" src="{{message.utilisateur.urlPhoto}}" alt="Image représentant {{message.utilisateur.prenom}} {{message.utilisateur.nom}}">
+                                <div class="commentaire-photo-container">
+                                    <img class="photo-user-comment" src="{{message.utilisateur.urlPhoto}}" alt="Image représentant {{message.utilisateur.prenom}} {{message.utilisateur.nom}}">
+                                </div>
                                 <div class="trick-comment">
                                     <p class="trick-comment-content">{{message.contenu}}</p>
                                     <span class="trick-comment-date-author">Le {{message.date|date('d-m-Y')}} à {{message.date|date('H:i')}} par {{message.utilisateur.prenom}} {{message.utilisateur.nom}}</span>
