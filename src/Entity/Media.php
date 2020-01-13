@@ -5,7 +5,6 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\ManyToOne;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\MediaRepository")
@@ -93,19 +92,19 @@ class Media
         return $this;
     }
 
-    public function getAlt(): ?string
+    public function getAlt()
     {
         return $this->alt;
     }
 
-    public function setAlt(?string $alt): self
+    public function setAlt($alt)
     {
         $this->alt = $alt;
 
         return $this;
     }
     
-    public function getIsImage(): ?bool
+    public function getIsImage()
     {
         return $this->isImage;
     }
@@ -117,7 +116,7 @@ class Media
         return $this;
     }
 
-    public function getIsMainPicture(): ?bool
+    public function getIsMainPicture()
     {
         return $this->isMainPicture;
     }

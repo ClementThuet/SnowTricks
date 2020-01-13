@@ -89,22 +89,27 @@ class Figure
         return $this->medias;
     }
     
+    //Permet de savoir si / retrouver l'image principale si il en existe une
     public function getMainPicture()
     {
         $medias=$this->getMedias();
         foreach($medias as $media){
+            //var_dump($media->getIsMainPicture()== true);
             if ($media->getIsMainPicture() == true){
                return $media;
+                //return 'dans le if';
             }
         }
-        if($medias[0] != null)
+        /*if($medias[0] != null)
         {
             return $medias[0];
+            //return 'PAS dans le if';
         }
         else
         {
             return null;
-        }
+        }*/
+        return null;
         
     }
     
