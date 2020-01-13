@@ -84,10 +84,6 @@ class STController extends AbstractController{
         return $response;
     }    
     
-    public function dashboard(){
-        return $this->render('dashboard.html.twig');
-    }
-    
     public function ajoutFigure(Request $request){
         
         //Vérification que l'utilisateur est connecté

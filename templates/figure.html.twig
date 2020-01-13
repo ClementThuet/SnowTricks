@@ -84,7 +84,8 @@
                     {% endfor %}
                     <h1 class="trick-name">{{figure.nom}}</h1>
                     <div class="trick-presentation">
-                        {% if figure.mainPicture.url is defined and figure.mainPicture.isMainPicture is not null%}
+                        {#{% if figure.mainPicture.url is defined and figure.mainPicture.isMainPicture is not null%}#}
+                        {% if figure.mainPicture.url is defined %}
                             <img class="trick-main-picture" src="{{figure.mainPicture.url}}" alt="{{figure.mainPicture.alt}}">
                         {% else %}
                             <img class="trick-main-picture" src="{{asset('img/default-image.jpg')}}" alt="Image par défaut">

@@ -392,8 +392,8 @@ a:hover {
         margin-bottom:5vh;
     }
     .update-medias-btns{
-       margin-bottom:7vh !important;
        flex-wrap:wrap;
+       margin-bottom:7vh !important;
     }
     .medias-btns{
         margin:2px;
@@ -406,8 +406,8 @@ a:hover {
         display: none;
     }
     .ST-main-title{
-        font-family: 'Lato', sans-serif;
         color:#ededed;
+        font-family: 'Lato', sans-serif;
         font-size:4.5rem;
         font-weight: bold;
         margin-top:1vh;
@@ -415,12 +415,12 @@ a:hover {
         text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
     }
     .ST-subtitle{
+        color:#ededed;
         font-family: 'Lato', sans-serif;
         font-size:2.5rem;
         font-weight: bold;
         margin-top:25vh;
         text-align: center;
-        color:#ededed;
         text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
     }
     

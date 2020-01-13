@@ -35,9 +35,11 @@
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.2",
         "fzaninotto/faker": "^1.8",
+        "liip/functional-test-bundle": "^3.3",
         "symfony/apache-pack": "^1.0",
         "symfony/debug-pack": "*",
         "symfony/maker-bundle": "^1.0",
+        "symfony/phpunit-bridge": "^5.0",
         "symfony/profiler-pack": "^1.0",
         "symfony/test-pack": "*",
         "symfony/web-server-bundle": "4.3.*"
