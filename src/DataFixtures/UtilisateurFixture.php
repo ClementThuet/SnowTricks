@@ -17,14 +17,17 @@ class UtilisateurFixture extends BaseFixture
     
     protected function loadData(ObjectManager $manager)
     {
-       $this->createMany(10, 'main_users', function($i) {
+       /*$this->createMany(10, 'main_users', function($i) {
             $user = new Utilisateur();
             $user->setEmail(sprintf('SuperUtilisateur%d@gmail.com', $i));
             $user->setNom($this->faker->lastName);
             $user->setPrenom($this->faker->firstName);
             $user->setPassword($this->passwordEncoder->encodePassword($user,'test'));
+            $user->setIsAccountActive(true);
+            $user->setUrlPhoto('/img/default-user-profile-image.png');
+        
             return $user;
         });
-        $manager->flush();
+        $manager->flush();*/
     }
 }

@@ -68,7 +68,7 @@
                                 <i class="fas fa-edit glyphicon-edit-trick"></i>
                             </a>
                             <a>
-                               <i data-url="/supprimer-une-figure/{{figure.id}}" class="fa fa-trash glyphicon-remove-trick delete-trick"></i>
+                               <i onclick="deleteTrick({{figure.id}})" class="fa fa-trash glyphicon-remove-trick delete-trick"></i>
                             </a>
                         </div>
                     </div>
@@ -110,16 +110,7 @@
                                 </a>
                                 <span class="trick-title">{{media.titre}}</span>
                                 <a>
-                                   <i data-url="/supprimer-un-media/{{media.id}}/{{figure.id}}" class="fa fa-trash glyphicon-remove-hp delete-media" aria-hidden="true"></i>
-                                </a>
-                            </div>
-                            
-                            <div class="glyph-container">
-                                <a href="/modifier-un-media/{{media.id}}/{{figure.id}}">
-                                    <span class="glyphicon glyphicon-pencil glyphicon-media" aria-hidden="true"></span>
-                                </a>
-                                <a href="/supprimer-un-media/{{media.id}}/{{figure.id}}">
-                                    <span class="glyphicon glyphicon-remove " aria-hidden="true"></span>
+                                   <i onclick="deleteMedia({{media.id}},{{figure.id}})" class="fa fa-trash glyphicon-remove-hp delete-media" aria-hidden="true"></i>
                                 </a>
                             </div>
                         </div>
@@ -183,5 +174,13 @@
                 </div>
             </div>
         </div>
+        <script> //Demande de confirmation pour la suppression d'une figure / media
+            function deleteTrick($id){
+                window.location.replace('/supprimer-une-figure/'+$id);
+            }
+            function deleteMedia($idMedia,$idFigure){
+                window.location.replace('/supprimer-un-media/'+$idMedia+'/'+$idFigure);
+            }
+        </script>
     {% endblock %}
 {% endblock %}

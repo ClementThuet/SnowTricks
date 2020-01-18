@@ -59,7 +59,7 @@ class STController extends AbstractController{
         $idFigure=$request->request->get('idFigure');
         $firstMessage=$request->request->get('firstMessage');
         $nbMessageToAdd=$request->request->get('nbMessageToAdd');
-        // selecting posts 
+        // Recherche des $nbMessageToAdd messages suivants
         $TenMoreMessages = $repository->find10Results($idFigure,$firstMessage,$nbMessageToAdd);
         $messages='';
         foreach ($TenMoreMessages as $message){
@@ -87,7 +87,7 @@ class STController extends AbstractController{
     public function ajoutFigure(Request $request){
         
         //Vérification que l'utilisateur est connecté
-        
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY'); 
         $user = $this->getUser();
         $figure = new Figure();
         $form = $this->createForm(UpdateFigureType::class, $figure);
@@ -100,8 +100,9 @@ class STController extends AbstractController{
             $figure->setDateCreation($dateCreation);
             $entityManager->persist($figure);
             $entityManager->flush();
+           // dd($figure->getNom());
             $this->addFlash('successAddTrick', 'Figure ajoutée avec succès.');
-            return $this->redirectToRoute('nomFigure',['idFigure'=>$figure->getNom()]);
+            return $this->redirectToRoute('figure',['nomFigure'=>$figure->getNom()]);
         }
         return $this->render('ajoutFigureForm.html.twig', [
             'form' => $form->createView(),
@@ -120,11 +121,9 @@ class STController extends AbstractController{
             $medias->add($media);
         }
         $form = $this->createForm(UpdateFigureType::class, $figure);
-        //L'erreur se produit ici si les champsdu form ssont vides
+        //L'erreur se produit ici si les champs du form ssont vides
         $form->handleRequest($request);
-        
         if ($form->isSubmitted() && $form->isValid()) {
-           
             $figure->setDateDerniereModification(new \DateTime('now'));
             $figure->setDernierUtilisateurModification($user);
             $entityManager->persist($figure);

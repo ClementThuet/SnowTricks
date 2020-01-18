@@ -20,6 +20,7 @@ class MessageRepository extends ServiceEntityRepository
     }
     
     public function find10Results($idFigure,$firstMessage,$nbMessageToAdd){
+       
         return $this->createQueryBuilder('comment')
         ->innerJoin('comment.figure', 'f')
         ->where('f.id = :idFigure')

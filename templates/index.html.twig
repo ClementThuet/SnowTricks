@@ -84,33 +84,24 @@
                         {% for figure in figures %}
                                 <div class="col-lg-3 col-md-4 col-sm-12">
                                     <div class="media-trick">
-                                         {% if figure.mainPicture.url is defined and figure.mainPicture.isMainPicture is not null%}
+                                        {% if figure.mainPicture.url is defined and figure.mainPicture.isMainPicture is not null%}
                                             <a href="figure/{{figure.nom}}">
                                                 <img class="img-trick" src="{{figure.mainPicture.url}}" alt="{{figure.mainPicture.alt}}">
                                             </a>
-                                            <div class="glyph-container">
-                                                <a href="/modifier-une-figure/{{figure.id}}">
-                                                    <i class="fas fa-edit glyphicon-edit-hp"></i>
-                                                </a>
-                                                <span class="trick-title">{{figure.nom}}</span>
-                                                <a href="/supprimer-une-figure/{{figure.id}}">
-                                                   <i class="fa fa-trash glyphicon-remove-hp" aria-hidden="true"></i>
-                                                </a>
-                                            </div>
                                         {%else%}
                                             <a href="figure/{{figure.nom}}">
                                                 <img class="img-trick" src="{{asset('img/default-image.jpg')}}" alt="Image par défaut">
                                             </a>
+                                        {%endif%}
                                             <div class="glyph-container">
                                                 <a href="/modifier-une-figure/{{figure.id}}">
                                                     <i class="fas fa-edit glyphicon-edit-hp"></i>
                                                 </a>
                                                 <span class="trick-title">{{figure.nom}}</span>
                                                 <a>
-                                                   <i data-url="/supprimer-une-figure/{{figure.id}}" class="fa fa-trash glyphicon-remove-hp delete-media" aria-hidden="true"></i>
+                                                    <i onclick="deleteTrick({{figure.id}})" class="fa fa-trash glyphicon-remove-hp delete-trick"></i>
                                                 </a>
                                             </div>
-                                        {%endif%}
                                     </div>
                                 </div>
                         {%endfor%}
@@ -122,6 +113,10 @@
                 <div><i class="fas fa-plus"></i></div>
             </div>   
         </a>    
-           
+        <script> //Demandede confirmation pour la suppression d'une figure
+            function deleteTrick($id){
+                window.location.replace('/supprimer-une-figure/'+$id);
+            }
+        </script>
     {% endblock %}
 {% endblock %}

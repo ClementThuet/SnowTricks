@@ -39,10 +39,38 @@ class FigureTest extends TestCase
         $this->assertSame("A ramdom date", $figure->getDateCreation(),'La date de création ne correspond pas');
     }
     
+    public function testFindMainImage()
+    {
+        $figure=new Figure();
+        $media=new Media();
+        $media2=new Media();
+        $media->setIsMainPicture(false);
+        $media2->setIsMainPicture(true);
+        $figure->addMedia($media);
+        $figure->addMedia($media2);
+        $isMainPicture = $figure->getMainPicture();
+        $this->assertIsObject($isMainPicture,"Impossible de trouver l'image principale existante");
+    }
+    
+    public function testFindThereIsNoMainImage()
+    {
+        $figure=new Figure();
+        $media=new Media();
+        $media2=new Media();
+        $media->setIsMainPicture(false);
+        $media2->setIsMainPicture(false);
+        $figure->addMedia($media);
+        $figure->addMedia($media2);
+        $isMainPicture = $figure->getMainPicture();
+        $this->assertSame(null,$isMainPicture,"Ne retourne pas qu'il n'existe pas d'image principale");
+    }
+    
+    
+    
     /**
     * @dataProvider provideBooleans
     */
-    public function testGettingMainImage($trueOrFalse)
+   /* public function testGettingMainImage($trueOrFalse)        Another way to test
     {
         $figure=new Figure();
         $media=new Media();
@@ -64,6 +92,8 @@ class FigureTest extends TestCase
             $isMainPicture = $figure->getMainPicture();
             $this->assertSame(null,$isMainPicture,"Ne retourne pas qu'il n'existe pas d'image principale");
         }
-    }
+    }*/
+    
+    
     
 }

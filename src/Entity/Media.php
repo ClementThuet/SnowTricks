@@ -20,7 +20,8 @@ class Media
 
     /**
      * @ORM\Column(type="string", length=200)
-     */
+     * @Assert\NotBlank(message = "Vous devez obligatoirement saisir un nom.")
+    */
     private $titre;
     
     /**
@@ -73,7 +74,7 @@ class Media
         return $this->titre;
     }
 
-    public function setTitre(string $titre): self
+    public function setTitre( $titre)
     {
         $this->titre = $titre;
 
@@ -85,7 +86,7 @@ class Media
         return $this->url;
     }
 
-    public function setUrl(string $url): self
+    public function setUrl($url)
     {
         $this->url = $url;
 
@@ -109,7 +110,7 @@ class Media
         return $this->isImage;
     }
 
-    public function setIsImage(bool $isImage): self
+    public function setIsImage($isImage)
     {
         $this->isImage = $isImage;
 
@@ -121,7 +122,7 @@ class Media
         return $this->isMainPicture;
     }
 
-    public function setIsMainPicture(bool $isMainPicture): self
+    public function setIsMainPicture($isMainPicture)
     {
         $this->isMainPicture = $isMainPicture;
 
