@@ -85,8 +85,6 @@
                             <div class="form-error">
                                 {{ form_errors(form.description) }}
                             </div>
-                            
-                            {#{{ form_row(form.description,{'attr':{'class':'form-control textarea-comment','placeholder':'Veuillez saisir une description de la figure'}}) }}#}
                         </div>
                         <div class="form-group">
                             {{ form_label(form.groupe, 'Groupe', {'label_attr': {'class': 'form-label'}}) }}
@@ -120,23 +118,17 @@
                             </div>
                             
                             <div class="glyph-container">
-                                 
                                  <a href="/modifier-un-media/{{media.id}}/{{figure.id}}">
                                     <i class="fas fa-edit glyphicon-edit-hp"></i>
                                 </a>
-                                
                                 <a>
-                                   <i data-url="/supprimer-un-media/{{media.id}}/{{figure.id}}" class="fa fa-trash glyphicon-remove-hp delete-media" aria-hidden="true"></i>
+                                   <i onclick="deleteMedia({{media.id}},{{figure.id}})" class="fa fa-trash glyphicon-remove-hp delete-media" aria-hidden="true"></i>
                                 </a>
                             </div>
                         </div>
                     </div>
                 {%endfor%}
             </div>
-            {#<div class="form-group">
-                <ul class="medias" data-prototype="{{ form_widget(form.medias.vars.prototype)|e('html_attr') }}">
-                </ul>
-            </div>#}
             <div class="form-group update-medias-btns">
                 <button type="button" class="add_media_link btn medias-btns" onclick="window.history.back()">Retour</button>
                 <a href="/figure/{{figure.nom}}">
@@ -149,5 +141,13 @@
             </div>
             {{ form_end(form) }}
             </div>
+            <script> //Demande de confirmation pour la suppression d'une figure / media
+            function deleteTrick($id){
+                window.location.replace('/supprimer-une-figure/'+$id);
+            }
+            function deleteMedia($idMedia,$idFigure){
+                window.location.replace('/supprimer-un-media/'+$idMedia+'/'+$idFigure);
+            }
+        </script>
     {% endblock %}
 {% endblock %}

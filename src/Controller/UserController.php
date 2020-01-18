@@ -54,7 +54,7 @@ class UserController extends AbstractController
                     . 'Cliquez sur le lien ci-dessous pour activer votre compte.'
                     . '<br>'
                     . '<a href='.$accActivationLink.'>Activer mon compte</a> '
-                    . '<br>A bientôt,</p>'
+                    . '<br>A bientôt.</p>'
                     .'<p style="margin-left:25%;">L\'équipe SnowTricks</p>');
         $mailer->send($email);
         
@@ -72,7 +72,7 @@ class UserController extends AbstractController
             $utilisateur->setUrlPhoto('/img/default-user-profile-image.png');
             $entityManager->persist($utilisateur);
             $entityManager->flush();
-            $this->addFlash('successActivateAccount', 'Le lien sur lequel vous avez cliqué ne correspond à aucun utilisateur, merci de réesayer.');
+            $this->addFlash('successActivateAccount', 'Votre compte est activé, vous pouvez désormais vous connecter.');
         }
         else
         {

@@ -41,7 +41,7 @@ class Figure
     
     /**
      * @Assert\Date
-     * @ORM\Column(type="date", nullable=true)
+     * @ORM\Column(type="date")
      */
     private $dateCreation;
     
@@ -94,23 +94,11 @@ class Figure
     {
         $medias=$this->getMedias();
         foreach($medias as $media){
-            //var_dump($media->getIsMainPicture()== true);
             if ($media->getIsMainPicture() == true){
                return $media;
-                //return 'dans le if';
             }
         }
-        /*if($medias[0] != null)
-        {
-            return $medias[0];
-            //return 'PAS dans le if';
-        }
-        else
-        {
-            return null;
-        }*/
         return null;
-        
     }
     
     public function getId()
@@ -123,7 +111,7 @@ class Figure
         return $this->nom;
     }
 
-    public function setNom(string $nom): self
+    public function setNom($nom)
     {
         $this->nom = $nom;
 
@@ -135,7 +123,7 @@ class Figure
         return $this->description;
     }
 
-    public function setDescription(string $description): self
+    public function setDescription($description)
     {
         $this->description = $description;
 
@@ -147,7 +135,7 @@ class Figure
         return $this->groupe;
     }
 
-    public function setGroupe(string $groupe)
+    public function setGroupe($groupe)
     {
         $this->groupe = $groupe;
 

@@ -11,23 +11,44 @@ use App\Entity\Figure;
 class MediaTest extends TestCase
 {
    
-    public function testGettingSetting()
+    public function testTitre()
     {
         $media=new Media();
         $media->setTitre('titre');
-        $media->setIsImage(true);
-        $media->setIsMainPicture(true);
-        $media->setAlt('description alternative');
-        
         $titre=$media->getTitre();
+        $this->assertSame('titre',$titre,"Erreur lors de la récupération du titre");
+    }
+    
+    public function testIsImage()
+    {
+        $media=new Media();
+        $media->setIsImage(true);
         $isImage=$media->getIsImage();
+        $this->assertSame(true,$isImage,"Erreur lors de la récupération de isImage");
+    }
+    
+    public function testIsMainPic()
+    {
+        $media=new Media();
+        $media->setIsMainPicture(true);
         $isMainPicture=$media->getIsMainPicture();
+        $this->assertSame(true,$isMainPicture,"Erreur lors de la récupération de isMainPicture");
+    }
+    
+    public function testAlt()
+    {
+        $media=new Media();
+        $media->setAlt('description alternative');
         $alt=$media->getAlt();
-        
-        $this->assertSame('titre',$titre,"Erreur getting titre");
-        $this->assertSame(true,$isImage,"Erreur getting isImage");
-        $this->assertSame(true,$isMainPicture,"Erreur getting isMainPicture");
         $this->assertSame('description alternative',$alt,"Erreur getting alt");
+    }
+    
+    public function testGetTitre()
+    {
+        $media=new Media();
+        $media->setTitre('titre');
+        $titre=$media->getTitre();
+        $this->assertSame('titre',$titre,"Erreur getting titre");
     }
     
     public function testGettingFigure()

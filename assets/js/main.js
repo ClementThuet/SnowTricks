@@ -1,24 +1,10 @@
-
-//Demandede confirmation pour la suppression d'une figure
-$(".delete-trick").click(function() {
-    if (window.confirm("Êtes-vous certain de vouloir supprimer cette figure ?")) { 
-        $url=$(".delete-trick").data("url");
-        window.location.replace($url);
-    }
-});
-$(".delete-media").click(function() {
-    if (window.confirm("Êtes-vous certain de vouloir supprimer ce média ?")) { 
-        $url=$(".delete-media").data("url");
-        window.location.replace($url);
-    }
-});
 //Pour ajout/édit d'un média à un trick
 //Masquer "cette img est-elle l'img principale ?" si la réponse est non à "Ce média est-il une img ?"
 $isMainPicture=$("#formRowIsMainPicture");
 $inputUrlImage=$("#inputUrlImage");
 $inputUrlVideo=$("#inputUrlVideo");
 $isImage=$('[name="media[isImage]"]:checked').val();
-if($isImage === '0'){
+if($isImage === "0"){
     $isMainPicture.hide("fast");
     $inputUrlImage.hide("fast");
     $inputUrlVideo=$("#inputUrlVideo").show("fast");
