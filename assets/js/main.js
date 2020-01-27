@@ -28,7 +28,14 @@ $("[name='media[isImage]']").on('change', function() {
         $inputUrlVideo=$("#inputUrlVideo").hide("fast");
     }
 });
-
+//Show medias on click on button 
+ $(document).ready(function(){
+    // Load more data
+    $("#show-medias").click(function(){
+        $("#show-medias").css('display','none');
+        $(".media-trick").css('display','block');
+    });
+});
 //Charger plus de commentaire au click sur "voir plus"
 $(document).ready(function(){
     // Load more data

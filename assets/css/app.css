@@ -142,6 +142,13 @@ a:hover {
     max-height:70vh;
     max-width: 80vw;
 }
+.media-trick-container{
+    width:100%;
+    height:95%;
+    margin-top:2vh;
+    margin-bottom:2vh;
+    border: 2px solid #7d92b9;
+}
 .media-trick{
     width:100%;
     height:95%;
@@ -301,6 +308,10 @@ a:hover {
 .yesNo-btns{
     
 }
+.show-medias-container{
+    display:none;
+    text-align:center;
+}
 /* SPECIFIQUE A L'AFFICHAGE MOBILE' */
 @media screen and (max-width: 576px) {
     .menu-md-plus{
@@ -384,6 +395,14 @@ a:hover {
     .edit-del-trick-icons{
         margin-top:2vh;
         margin-top:5px;
+    }
+    .media-trick{
+        display:none;
+    }
+    .show-medias-container{
+        display:flex;
+        justify-content: center;
+        margin-top:2vh;
     }
     .trick-description{
         margin-top:3vh;

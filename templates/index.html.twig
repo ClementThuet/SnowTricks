@@ -83,7 +83,7 @@
                 {%if figures is defined%}
                         {% for figure in figures %}
                                 <div class="col-lg-3 col-md-4 col-sm-12">
-                                    <div class="media-trick">
+                                    <div class="media-trick-container">
                                         {% if figure.mainPicture.url is defined and figure.mainPicture.isMainPicture is not null%}
                                             <a href="figure/{{figure.nom}}">
                                                 <img class="img-trick" src="{{figure.mainPicture.url}}" alt="{{figure.mainPicture.alt}}">
@@ -108,11 +108,13 @@
                 {%endif%}
             </div>
         </div>
-        <a href="/ajouter-une-figure">
-            <div class="bt-add-trick">
-                <div><i class="fas fa-plus"></i></div>
-            </div>   
-        </a>    
+        {% if is_granted('IS_AUTHENTICATED_FULLY') == true%}
+            <a href="/ajouter-une-figure">
+                <div class="bt-add-trick">
+                    <div><i class="fas fa-plus"></i></div>
+                </div>   
+            </a>    
+        {%endif%}
         <script> //Demandede confirmation pour la suppression d'une figure
             function deleteTrick($id){
                 window.location.replace('/supprimer-une-figure/'+$id);

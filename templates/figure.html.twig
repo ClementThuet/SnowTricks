@@ -61,17 +61,19 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12 ">
-                    <div class="edit-del-trick-container">
-                        <div class="edit-del-trick-icons">  
-                            <h6 class="ST-subtitle-AP">Modifier cette figure ? </h6>
-                            <a href="/modifier-une-figure/{{figure.id}}">
-                                <i class="fas fa-edit glyphicon-edit-trick"></i>
-                            </a>
-                            <a>
-                               <i onclick="deleteTrick({{figure.id}})" class="fa fa-trash glyphicon-remove-trick delete-trick"></i>
-                            </a>
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') == true%}
+                        <div class="edit-del-trick-container">
+                            <div class="edit-del-trick-icons">  
+                                <h6 class="ST-subtitle-AP">Modifier cette figure ? </h6>
+                                <a href="/modifier-une-figure/{{figure.id}}">
+                                    <i class="fas fa-edit glyphicon-edit-trick"></i>
+                                </a>
+                                <a>
+                                   <i onclick="deleteTrick({{figure.id}})" class="fa fa-trash glyphicon-remove-trick delete-trick"></i>
+                                </a>
+                            </div>
                         </div>
-                    </div>
+                    {%endif%}
                     {% for message in app.flashes('successEditTrick') %}
                         <div class="alert alert-success">
                             {{ message }}
@@ -96,6 +98,9 @@
             <div class="row">
                 {% for media in medias %}
                     <div class="col-lg-3 col-md-4 col-sm-12">
+                        <div class="show-medias-container">
+                            <input type="button" id="show-medias" class="btn" value="Voir les médias">
+                        </div>
                         <div class="media-trick">
                             {%if media.isImage == true%}
                                 <img class="img-trick" src="{{media.url}}" alt="{{media.alt}}">

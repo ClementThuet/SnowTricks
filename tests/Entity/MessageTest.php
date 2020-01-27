@@ -9,14 +9,14 @@ use PHPUnit\Framework\TestCase;
 use App\Entity\Message;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-class MessageTest extends KernelTestCase
-{
+/*class MessageTest extends KernelTestCase
+{*/
    /**
      * @var \Doctrine\ORM\EntityManager
      */
-    private $entityManager;
+   // private $entityManager;
     
-    protected function setUp(): void
+  /*  protected function setUp(): void
     {
         $kernel = self::bootKernel();
 
@@ -53,7 +53,7 @@ class MessageTest extends KernelTestCase
         $this->entityManager = null;
     }
     
+    */
     
     
-    
-}
+//}
