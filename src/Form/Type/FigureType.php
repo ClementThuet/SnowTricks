@@ -22,12 +22,11 @@ class FigureType extends AbstractType
             ->add('medias', CollectionType::class,[
             'entry_type' => MediaType::class,
             'entry_options' => ['label' => false],
-            'by_reference' => false,
+            'by_reference' => true,
             'allow_add' => true,
             'allow_delete' => true,
             'label' => false,
             ])
-            ->add('save', SubmitType::class, ['label' => 'Enregistrer'])
         ;
     }
     

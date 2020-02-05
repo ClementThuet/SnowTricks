@@ -61,17 +61,16 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    
                     <h1 class='ST-title'>Modifier le trick : {{figure.nom}}</h1>
                     {% for message in app.flashes('successMediaTrick') %}
                         <div class="alert alert-success">
                             {{ message }}
                         </div>
                     {% endfor %}
-                    {{ form_start(form) }}
-                        {{ form_errors(form) }}
+                    {{ form_start(form) }} 
+                    {{ form_errors(form) }}
                         <div class="form-group">
-                            {{ form_label(form.nom, 'Nom', {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_label(form.nom, "Nom", {'label_attr': {'class': 'form-label'}}) }}
                             {{ form_widget(form.nom,{'attr':{'class':'form-control','placeholder':'Veuillez saisir un nom pour la figure'}}) }}
                             <small>{{ form_help(form.nom) }}</small>
                             <div class="form-error">
@@ -79,27 +78,44 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            {{ form_label(form.description, 'Description', {'label_attr': {'class': 'form-label'}}) }}
-                            {{ form_widget(form.description,{'attr':{'class':'form-control textarea-comment','placeholder':'Veuillez saisir une description de la figure'}}) }}
+                            {{ form_label(form.description, "Description", {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(form.description,{'attr':{'class':'form-control','placeholder':'Veuillez saisir une description de la figure'}}) }}
                             <small>{{ form_help(form.description) }}</small>
                             <div class="form-error">
                                 {{ form_errors(form.description) }}
                             </div>
                         </div>
                         <div class="form-group">
-                            {{ form_label(form.groupe, 'Groupe', {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_label(form.groupe, "Groupe", {'label_attr': {'class': 'form-label'}}) }}
                             {{ form_widget(form.groupe,{'attr':{'class':'form-control','placeholder':'Veuillez saisir le groupe de la figure'}}) }}
                             <small>{{ form_help(form.groupe) }}</small>
                             <div class="form-error">
                                 {{ form_errors(form.groupe) }}
                             </div>
                         </div>
-                         <h3 class="ST-title"> Les médias liées au trick</h3>
+
+                    <h3 class='ST-title'>Medias</h3>
+                    <ul class="medias" data-prototype="{{ form_widget(form.medias.vars.prototype)|e('html_attr') }}">
+                        {% for media in form.medias %}
+                            <div class="form-group media-wrapper media-already-saved"  data-id="{{loop.index0}}">
+                                {{form_row(form.medias[loop.index0].titre)}}
+                                {{form_row(form.medias[loop.index0].isMainPicture)}}
+                                {{form_row(form.medias[loop.index0].url)}}
+                                {{form_row(form.medias[loop.index0].urlVideo)}}
+                                {{form_row(form.medias[loop.index0].alt)}}
+                                <button type="button" class="btn medias-btns btns-delete-media btn-delete-media-already-saved"  data-id="{{loop.index0}}">Supprimer ce média</button>
+                            </div>
+                        {% endfor %}
+                    </ul>
+                    
+                    <button type="submit" class="btn  medias-btns">Enregistrer</button>
+                    {{ form_end(form) }}
+                    
                 </div>
             </div>
         </div> 
                         
-        <div class="container-fluid">
+       {#<div class="container-fluid">
             <div class="row">
                 {% for media in medias %}
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
@@ -131,22 +147,26 @@
             </div>
             <div class="form-group update-medias-btns">
                 <button type="button" class="add_media_link btn medias-btns" onclick="window.history.back()">Retour</button>
-                <a href="/figure/{{figure.nom}}">
+                <a href="/figure/{{figure.slug}}">
                     <button type="button" class="add_media_link btn medias-btns">Voir la figure</button>
                 </a>
                 <a href="/ajouter-un-media/{{figure.id}}">
                     <button type="button" class="add_media_link btn medias-btns">Ajouter un media</button>
                  </a>
-                {{ form_row(form.save,{'attr':{'class':'btn medias-btns'}}) }}
+                <button type="submit" class="btn  medias-btns">Enregistrer</button>
             </div>
             {{ form_end(form) }}
-            </div>
+            </div>#}
             <script> //Demande de confirmation pour la suppression d'une figure / media
             function deleteTrick($id){
-                window.location.replace('/supprimer-une-figure/'+$id);
+                if (window.confirm("Êtes-vous certain de vouloir supprimer cette figure ?")) { 
+                    window.location.replace('/supprimer-une-figure/'+$id);
+                }
             }
             function deleteMedia($idMedia,$idFigure){
-                window.location.replace('/supprimer-un-media/'+$idMedia+'/'+$idFigure);
+                if (window.confirm("Êtes-vous certain de vouloir supprimer ce média ?")) { 
+                    window.location.replace('/supprimer-un-media/'+$idMedia+'/'+$idFigure);
+                }
             }
         </script>
     {% endblock %}

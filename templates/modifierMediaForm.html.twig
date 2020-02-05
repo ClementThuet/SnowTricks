@@ -72,14 +72,6 @@
                                 {{ form_errors(form.titre) }}
                             </div>
                         </div>
-                        <div class="form-group">
-                            {{ form_label(form.isImage, 'Ce média est-il une image ?', {'label_attr': {'class': 'form-label'}}) }}
-                            {{ form_widget(form.isImage,{'attr':{'class':'yesNo-btns'}}) }}
-                            <small>{{ form_help(form.isImage) }}</small>
-                            <div class="form-error">
-                                {{ form_errors(form.isImage) }}
-                            </div>
-                        </div>
                         <div class="form-group" id="formRowIsMainPicture">
                             {{ form_label(form.isMainPicture, "Cette image est-elle l'image principale ?", {'label_attr': {'class': 'form-label'}}) }}
                             {{ form_widget(form.isMainPicture,{'attr':{'class':'yesNo-btns'}}) }}
@@ -106,15 +98,15 @@
                                 {{ form_errors(form.urlVideo) }}
                             </div>
                         </div>
-                        {%if media.isImage == true%}
+                        {%if media.url is not null%}
                             <div class="text-center">
-                                <img class="img-update-media" src="{{media.url}}" alt="{{media.alt}}">
+                                {#<img class="img-update-media" src="{{media.url}}" alt="{{media.alt}}">#}
                                 <div>Image actuelle : <b>{{media.url}}</b> </div>
                             </div>
-                        {%else%}
+                        {%elseif media.urlVideo is not null%}
                             <div class="text-center">
-                            <iframe class="video-update-media" src="{{media.url}}"></iframe>
-                                <div>Source actuelle : <b>{{media.url}}</b> </div>
+                            <iframe class="video-update-media" src="{{media.urlVideo}}"></iframe>
+                                <div>Source actuelle : <b>{{media.urlVideo}}</b> </div>
                             </div>
                         {%endif%}
                         <div class="form-group">
@@ -128,7 +120,7 @@
                         </div>
                         <div class="form-group update-medias-btns">
                             <button type="button" class="add_media_link btn  medias-btns" onclick="window.history.back()">Retour</button>
-                            {{ form_row(form.save,{'attr':{'class':'btn medias-btns'}}) }}
+                            <button type="submit" class="btn  medias-btns">Enregistrer</button>
                         </div>
                         {{ form_end(form) }}
                 </div>

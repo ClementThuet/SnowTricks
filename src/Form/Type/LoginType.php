@@ -21,8 +21,7 @@ class LoginType extends AbstractType
             ->add('password', PasswordType::class,[
                 'constraints' => [
                 new NotBlank()]
-            ])
-            ->add('send', SubmitType::class, ['label' => 'Me connecter']);
+            ]);
     }
     
     public function setDefaultOptions(OptionsResolverInterface $resolver)

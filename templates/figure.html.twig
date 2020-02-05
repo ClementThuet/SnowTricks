@@ -102,15 +102,15 @@
                             <input type="button" id="show-medias" class="btn" value="Voir les médias">
                         </div>
                         <div class="media-trick">
-                            {%if media.isImage == true%}
+                            {%if media.url is defined and media.url is not null%}
                                 <img class="img-trick" src="{{media.url}}" alt="{{media.alt}}">
                             {%else%}
                                 <iframe class="video-trick"
-                                    src="{{media.url}}">
+                                    src="{{media.urlVideo}}">
                                 </iframe>
                             {%endif%}
                             <div class="glyph-container">
-                                <a href="/modifier-une-figure/{{figure.id}}">
+                                <a href="/modifier-un-media/{{media.id}}/{{figure.id}}">
                                     <i class="fas fa-edit glyphicon-edit-hp"></i>
                                 </a>
                                 <span class="trick-title">{{media.titre}}</span>
@@ -146,7 +146,7 @@
                             </div>
                             <div class="form-group update-medias-btns">
                                 <button type="button" class="add_media_link btn medias-btns" onclick="window.history.back()">Retour</button>
-                                {{ form_row(form.save,{'attr':{'class':'btn medias-btns'}}) }}
+                                <button type="submit" class="btn  medias-btns">Enregistrer</button>
                             </div>
                             {{ form_end(form) }}
                         </div>
@@ -181,10 +181,14 @@
         </div>
         <script> //Demande de confirmation pour la suppression d'une figure / media
             function deleteTrick($id){
-                window.location.replace('/supprimer-une-figure/'+$id);
+                if (window.confirm("Êtes-vous certain de vouloir supprimer cette figure ?")) { 
+                    window.location.replace('/supprimer-une-figure/'+$id);
+                }
             }
             function deleteMedia($idMedia,$idFigure){
-                window.location.replace('/supprimer-un-media/'+$idMedia+'/'+$idFigure);
+                if (window.confirm("Êtes-vous certain de vouloir supprimer ce média ?")) { 
+                    window.location.replace('/supprimer-un-media/'+$idMedia+'/'+$idFigure);
+                }
             }
         </script>
     {% endblock %}

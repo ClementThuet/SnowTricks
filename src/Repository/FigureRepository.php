@@ -19,6 +19,15 @@ class FigureRepository extends ServiceEntityRepository
         parent::__construct($registry, Figure::class);
     }
     
+    public function findTricksFromXToX($firstFigure,$nbFigureToAdd){
+       
+        return $this->createQueryBuilder('figure')
+        ->setFirstResult($firstFigure)
+        ->setMaxResults($nbFigureToAdd)
+        ->getQuery()
+        ->getResult()
+        ;
+    }
     
     // /**
     //  * @return Figure[] Returns an array of Figure objects

@@ -99,7 +99,8 @@ class UserController extends AbstractController
                 $accResetPWLink="snowtricks/reinitialiser-mon-mot-de-passe/".$resetPasswordToken."";
                 $email = (new Email())
                 ->from('clementthuet7@gmail.com')
-                ->to($adresseEmail)
+                // Pour la présentation ->to($adresseEmail)
+                ->to('clementthuet7@gmail.com')
                 ->subject('Réinitialisation de votre mot de passe SnowTricks')
                 ->html('<p>Bonjour,'
                         . '<br>'

@@ -180,6 +180,16 @@ a:hover {
     justify-content: center;
 }
 
+.media-wrapper{
+    display:inline-block;
+    padding:2%;
+    width:45%;
+}
+.btns-delete-media{
+    margin-top:2vh;
+    display:flex;
+    
+}
 .form-contenu-input{
     width:95%;
 }
@@ -231,6 +241,13 @@ a:hover {
 .photo-user-profil{
     border-radius: 10px;
     width:20vh;
+}
+.tricks-voir-plus{
+    
+    display:flex;
+    justify-content: center;
+    margin-top:2vh;
+    width:100vw;
 }
 .comment-voir-plus{
     margin-bottom:1vh;

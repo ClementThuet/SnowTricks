@@ -24,10 +24,7 @@ class Media
     */
     private $titre;
     
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $isImage;
+    
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
@@ -35,9 +32,14 @@ class Media
     private $isMainPicture;
     
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $url;
+    
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $urlVideo;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -105,14 +107,14 @@ class Media
         return $this;
     }
     
-    public function getIsImage()
+    public function getUrlVideo()
     {
-        return $this->isImage;
+        return $this->urlVideo;
     }
 
-    public function setIsImage($isImage)
+    public function setUrlVideo($urlVideo)
     {
-        $this->isImage = $isImage;
+        $this->urlVideo= $urlVideo;
 
         return $this;
     }

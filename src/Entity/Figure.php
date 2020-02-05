@@ -8,6 +8,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\OneToMany;
 use Doctrine\Common\Collections\ArrayCollection;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\FigureRepository")
@@ -27,7 +28,13 @@ class Figure
      * @Assert\NotBlank(message = "Vous devez obligatoirement saisir un nom.")
      */
     private $nom;
-
+    
+    /**
+     * @ORM\Column(type="string", unique=true)
+     * @Gedmo\Slug(fields={"nom"})
+     */
+    private $slug;
+    
     /**
      * @ORM\Column(type="text")
      * @Assert\NotBlank(message = "Vous devez obligatoirement saisir une description.")
@@ -101,6 +108,14 @@ class Figure
         return null;
     }
     
+    function getSlug() {
+        return $this->slug;
+    }
+
+    function setSlug($slug) {
+        $this->slug = $slug;
+    }
+
     public function getId()
     {
         return $this->id;

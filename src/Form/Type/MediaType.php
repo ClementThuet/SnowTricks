@@ -19,13 +19,6 @@ class MediaType extends AbstractType
     {
         $builder
             ->add('titre', TextType::class,['attr' => ['class' => 'form-control']])
-            ->add('isImage', ChoiceType::class,[
-                'choices' => array('Oui' => true, 'Non' => false),
-                'multiple'=>false,
-                'expanded'=>true,
-                //'data' => 1,
-                'label' => 'Ce média est-t-il une image ?',
-                'attr' => ['class' => 'custom-control-input']])
             ->add('isMainPicture', ChoiceType::class,[
                 'choices' => array('Oui' => true, 'Non' => false),
                 'multiple'=>false,
@@ -33,12 +26,12 @@ class MediaType extends AbstractType
                 'required' => false,
                 'placeholder' => false,
                 'label' => 'Cette image est-t-elle l\'image principale ?',
-                //'data' => 0,
                 ])
+            ->add('urlVideo', TextType::class,['attr' => ['class' => 'form-control'],'label' => 'Url si le lien est une vidéo','required' => false])
             ->add('url', FileType::class, [
-                'label' => 'URL du média',
+                'label' => 'Sélection de l\'image : ',
                  // unmapped means that this field is not associated to any entity property
-                'mapped' => false,
+                'mapped' => true,
                 'required' => false,
                 // unmapped fields can't define their validation using annotations
                 // in the associated entity, so you can use the PHP constraint classes
@@ -53,9 +46,8 @@ class MediaType extends AbstractType
                     ])
                 ],
             ])
-            ->add('urlVideo', TextType::class,['attr' => ['class' => 'form-control'],'mapped'=>false,'required'=>false])
+            
             ->add('alt', TextType::class, ['label' => 'Description alternative','attr' => ['class' => 'form-control']])
-            ->add('save', SubmitType::class, ['label' => 'Enregistrer'])
         ;
     }
     

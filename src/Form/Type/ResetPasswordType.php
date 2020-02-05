@@ -14,7 +14,6 @@ class ResetPasswordType extends AbstractType
     {
         $builder
             ->add('email', EmailType::class)
-            ->add('save', SubmitType::class, ['label' => 'Réinitialiser'])
         ;
     }
     

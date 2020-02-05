@@ -22,7 +22,6 @@ class UpdateFigureType extends AbstractType
             ]])
             ->add('description', TextareaType::class)
             ->add('groupe', TextType::class)
-            ->add('save', SubmitType::class, ['label' => 'Enregistrer'])
         ;
     }
     

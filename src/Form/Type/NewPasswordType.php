@@ -18,7 +18,6 @@ class NewPasswordType extends AbstractType
                 'constraints' => [new NotBlank()]])
             ->add('passwordCheck', PasswordType::class, ['label' => 'Vérification du mot de passe',
                 'constraints' => [new NotBlank()]])    
-            ->add('save', SubmitType::class, ['label' => 'Enregistrer'])
         ;
     }
     

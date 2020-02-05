@@ -3,9 +3,13 @@ index:
     controller: App\Controller\STController::index
 
 figure:
-       path: /figure/{nomFigure}
+       path: /figure/{slug}
        controller: App\Controller\STController::afficherFigure  
-
+       
+show_more_tricks:
+       path: /afficher-plus-de-figures
+       controller: App\Controller\STController::afficherPlusFigures 
+       
 show_more_comments:
        path: /afficher-plus-de-commentaires
        controller: App\Controller\STController::afficherPlusCommentaires  
