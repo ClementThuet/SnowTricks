@@ -167,7 +167,7 @@ class STController extends AbstractController{
         $entityManager = $this->getDoctrine()->getManager();
         $figure = $entityManager->getRepository(Figure::class)->find($idFigure);
         $user = $this->getUser();
-        $updateTrickHelper->storeOldsUrls($figure);
+        $oldsUrl=$updateTrickHelper->storeOldsUrls($figure);
         
         /*$medias=$figure->getMedias();
         // Store the ancients URL to use in case form uis submitted without selected file
@@ -187,7 +187,7 @@ class STController extends AbstractController{
         if ($form->isSubmitted() && $form->isValid()) {
             $figure->setDateDerniereModification(new \DateTime('now'));
             $figure->setDernierUtilisateurModification($user);
-            $updateTrickHelper->uploadMedias($form);
+            $updateTrickHelper->uploadMedias($figure,$form,$oldsUrl);
             //Récupération des médias pour upload de.s photos
             /*$medias=$form->getData()->getMedias();
             $cpt=0; // Used to found back the previous url
@@ -219,10 +219,10 @@ class STController extends AbstractController{
                 }
                 $figure->addMedia($media);
                 
-            }*/
+            }
             $entityManager->persist($figure);
             $entityManager->flush();
-            $this->addFlash('successEditTrick', 'Figure modifiée avec succès.');
+            $this->addFlash('successEditTrick', 'Figure modifiée avec succès.');*/
             return $this->redirectToRoute('figure',['slug'=>$figure->getSlug()]);
         }
         return $this->render('modifierFigureForm.html.twig', [
