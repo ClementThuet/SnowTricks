@@ -43,8 +43,12 @@ class Message
      */
     private $figure;
    
-
-        public function getId()
+    public function __construct()
+    {
+        $this->date = new \DateTime();
+    }
+    
+    public function getId()
     {
         return $this->id;
     }

@@ -75,12 +75,12 @@ delete_media:
         
 profil_membre:
     path: /profil-membre/{idUtilisateur}
-    controller: App\Controller\UserController::AfficherProfilMembre
+    controller: App\Controller\UserController::afficherProfilMembre
     requirements:
         idUtilisateur: '\d+'
 
 activer_compte:
     path: /activer-mon-compte/{token}
-    controller: App\Controller\UserController::ActiverCompte
+    controller: App\Controller\UserController::activerCompte
     requirements:
         token: '\w+'

@@ -104,10 +104,12 @@
                         <div class="media-trick">
                             {%if media.url is defined and media.url is not null%}
                                 <img class="img-trick" src="{{media.url}}" alt="{{media.alt}}">
-                            {%else%}
+                            {%elseif media.urlVideo is defined and media.urlVideo is not null%}
                                 <iframe class="video-trick"
                                     src="{{media.urlVideo}}">
                                 </iframe>
+                            {%else%}
+                                <img class="img-trick" src="{{asset('img/default-image.jpg')}}" alt="Image par défaut">
                             {%endif%}
                             <div class="glyph-container">
                                 <a href="/modifier-un-media/{{media.id}}/{{figure.id}}">

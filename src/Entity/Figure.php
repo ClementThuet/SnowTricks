@@ -86,9 +86,11 @@ class Figure
     private $messages;
     
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->medias = new ArrayCollection();
         $this->messages = new ArrayCollection();
+        $this->dateCreation = new \DateTime();
     }
     
     public function getMedias()
