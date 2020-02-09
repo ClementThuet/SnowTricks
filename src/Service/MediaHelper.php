@@ -8,9 +8,8 @@ use App\Entity\Figure;
 use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class MediaHelper extends AbstractController
+class MediaHelper
 {
     protected $em;
     protected $params;
@@ -23,9 +22,8 @@ class MediaHelper extends AbstractController
 
     public function createFormUpdateMedia($idMedia, $idFigure)
     {
-        $entityManager = $this->em;
-        $figure= $entityManager->getRepository(Figure::class)->find($idFigure);
-        $media = $entityManager->getRepository(Media::class)->find($idMedia);
+        $figure= $this->em->getRepository(Figure::class)->find($idFigure);
+        $media = $this->em->getRepository(Media::class)->find($idMedia);
         if($media->getUrl() != null){
             $media->setUrl(new File('C:\wamp64\www\SnowTricks/public'.$media->getUrl()));
         }
