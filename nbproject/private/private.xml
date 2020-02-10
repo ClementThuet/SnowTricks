@@ -2,14 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/wamp64/www/SnowTricks/src/Service/IndexHelper.php</file>
-            <file>file:/C:/wamp64/www/SnowTricks/src/Service/CommentsHelper.php</file>
-            <file>file:/C:/wamp64/www/SnowTricks/src/Service/UserHelper.php</file>
-            <file>file:/C:/wamp64/www/SnowTricks/src/Service/MediaHelper.php</file>
-            <file>file:/C:/wamp64/www/SnowTricks/src/Service/UploadMediaFileHelper.php</file>
-            <file>file:/C:/wamp64/www/SnowTricks/src/Service/TrickHelper.php</file>
-            <file>file:/C:/wamp64/www/SnowTricks/src/Security/LoginFormAuthenticator.php</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

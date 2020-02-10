@@ -3,7 +3,6 @@
 namespace App\Service;
 
 use App\Entity\Media;
-use App\Form\Type\MediaType;
 use App\Entity\Figure;
 use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\ORM\EntityManagerInterface;
@@ -25,10 +24,9 @@ class MediaHelper
         $figure= $this->em->getRepository(Figure::class)->find($idFigure);
         $media = $this->em->getRepository(Media::class)->find($idMedia);
         if($media->getUrl() != null){
-            $media->setUrl(new File('C:\wamp64\www\SnowTricks/public'.$media->getUrl()));
+            $media->setUrl(new File($this->params->get('media_directory').$media->getUrl()));
         }
-        $form = $this->createForm(MediaType::class, $media);
-        return ['form'=>$form,'media'=>$media,'figure'=>$figure];
+        return ['media'=>$media,'figure'=>$figure];
     }
     
     public function updateMedia($form,$figure)

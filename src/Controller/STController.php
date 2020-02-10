@@ -10,6 +10,7 @@ use App\Form\Type\MessageType;
 use App\Repository\MessageRepository;
 use App\Repository\FigureRepository;
 use App\Form\Type\FigureType;
+use App\Form\Type\MediaType;
 use App\Form\Type\UpdateFigureType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -127,7 +128,7 @@ class STController extends AbstractController{
         
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $resultFormMediaFigure=$mediaHelper->createFormUpdateMedia($idMedia,$idFigure);
-        $form = $resultFormMediaFigure['form'];
+        $form = $this->createForm(MediaType::class, $resultFormMediaFigure['media']);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $mediaHelper->updateMedia($form,$resultFormMediaFigure['figure']);
